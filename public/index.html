@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenSignal AI — National Disaster Response Project Overview</title>
+  <meta name="description" content="Official Project Overview for GreenSignal AI: National Automated Disaster Response, Early Warning & Resource Allocation Infrastructure for Bangladesh (BDT 100 Cr Outlay).">
+  <meta property="og:title" content="GreenSignal AI — National Disaster Response Project Overview">
+  <meta property="og:description" content="Official Project Overview for GreenSignal AI: National Automated Disaster Response, Early Warning & Resource Allocation Infrastructure for Bangladesh (BDT 100 Cr Outlay).">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
+    
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.4); border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(16, 185, 129, 0.7); }
+
+    .image-zoom-card img {
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    .image-zoom-card:hover img {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-emerald-500 selection:text-white flex flex-col overflow-x-hidden">
+
+  <!-- =========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand / Logo -->
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition">
+            <i class="fa-solid fa-satellite-dish text-white text-lg"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-base tracking-tight text-white">GreenSignal</span>
+              <span class="text-xs px-1.5 py-0.5 rounded font-mono font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">AI</span>
+            </div>
+            <p class="text-[10px] text-slate-400 font-medium tracking-wide">National Disaster Infrastructure</p>
+          </div>
+        </a>
+        <span class="hidden lg:inline-block h-5 w-px bg-slate-800"></span>
+        <span class="hidden lg:inline-flex items-center gap-1.5 text-xs text-emerald-300 bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-800/60">
+          <i class="fa-solid fa-layer-group text-emerald-400"></i> Project Overview
+        </span>
+      </div>
+
+      <!-- Action Navigation Buttons -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5">
+        
+        <!-- 1. Sign In / Sign Up or Log Out Button (Desktop only: >= lg; on mobile/tablet it is inside the dropdown menu) -->
+        <div id="navbarAuthContainer" class="hidden lg:inline-flex items-center">
+          <a href="/auth.html" id="navAuthBtn" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-200 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition shadow">
+            <i class="fa-solid fa-user-shield text-emerald-400"></i>
+            <span id="navAuthText">Sign In / Sign Up</span>
+          </a>
+        </div>
+
+        <!-- 2. Messenger Button (Visible on all devices. On phone/tablet < lg, text is hidden to show icon only) -->
+        <a href="/platform.html?openMessenger=1" id="navMessengerBtn" class="inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 shadow-md shadow-indigo-700/20 transition" title="Field Emergency Messenger">
+          <i class="fa-solid fa-comments text-sm sm:text-xs"></i>
+          <span class="hidden lg:inline">Messenger</span>
+        </a>
+
+        <!-- 3. Main Dropdown Menu (Contains Slide Show, Live Tactical Command, Planner, DB Studio, PDF, Sections, and Mobile Auth) -->
+        <div class="relative inline-block">
+          <button id="indexNavMenuBtn" onclick="toggleIndexNavMenu(event)" class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-200 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition shadow" title="Menu">
+            <i class="fa-solid fa-bars text-sm"></i>
+            <span class="hidden sm:inline">Menu</span>
+            <i class="fa-solid fa-chevron-down text-[9px] opacity-70 ml-0.5"></i>
+          </button>
+
+          <!-- Dropdown Menu items -->
+          <div id="indexNavMenuDropdown" class="hidden absolute right-0 mt-2 w-72 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl py-2 z-50 text-xs max-h-[85vh] overflow-y-auto custom-scrollbar">
+            
+            <!-- Mobile / Tablet Sign In or Log Out Section (Visible < lg) -->
+            <div id="dropdownMobileAuthItem" class="lg:hidden px-2 pb-2 border-b border-slate-800 mb-1">
+              <a href="/auth.html" class="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-200 transition font-semibold">
+                <div class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-user-shield text-emerald-400 w-4 text-center"></i>
+                  <span>Sign In / Sign Up</span>
+                </div>
+                <i class="fa-solid fa-arrow-right text-[10px] text-slate-500"></i>
+              </a>
+            </div>
+
+            <!-- Slide Show Mode (Primary Action) -->
+            <div class="px-2 py-1">
+              <button onclick="toggleIndexNavMenu(); startSlideShow();" class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-white bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 shadow font-bold transition">
+                <div class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-tv text-cyan-300 w-4 text-center"></i>
+                  <span>Slide Show Mode</span>
+                </div>
+                <span class="text-[10px] bg-teal-800/80 text-teal-200 px-1.5 py-0.5 rounded font-mono">Present</span>
+              </button>
+            </div>
+
+            <div class="my-1 border-t border-slate-800"></div>
+
+            <!-- Platform & Operations Links -->
+            <div class="px-3 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-compass text-emerald-400"></i> Platform Systems
+            </div>
+
+            <a href="/platform.html" class="flex items-center gap-2.5 px-3 py-2 text-emerald-300 hover:bg-slate-800 transition font-semibold">
+              <i class="fa-solid fa-gauge-high text-emerald-400 w-4 text-center"></i>
+              <span>Live Tactical Command</span>
+            </a>
+
+            <a href="/district-planner.html" target="_blank" class="flex items-center gap-2.5 px-3 py-2 text-slate-200 hover:bg-slate-800 hover:text-white transition">
+              <i class="fa-solid fa-compass-drafting text-teal-400 w-4 text-center"></i>
+              <span>District Resource Planner</span>
+            </a>
+
+            <a href="/dev/db-manager.html" target="_blank" class="flex items-center gap-2.5 px-3 py-2 text-emerald-300 hover:bg-slate-800 transition">
+              <i class="fa-solid fa-database text-emerald-400 w-4 text-center"></i>
+              <span>Postgres DB Studio</span>
+            </a>
+
+            <a href="/api/proposal/download" download="GreenSignal_AI_Project_Proposal.pdf" class="flex items-center gap-2.5 px-3 py-2 text-rose-300 hover:bg-slate-800 transition font-semibold">
+              <i class="fa-solid fa-file-pdf text-rose-400 w-4 text-center"></i>
+              <span>Download Proposal PDF</span>
+            </a>
+
+            <div class="my-1 border-t border-slate-800"></div>
+
+            <!-- Document Table of Contents Jump Links -->
+            <div class="px-3 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-list-ul text-slate-400"></i> Jump to Section
+            </div>
+            <a href="#summary" onclick="toggleIndexNavMenu()" class="flex items-center gap-2.5 px-3 py-1.5 text-slate-300 hover:bg-slate-800 hover:text-white transition text-[11px]">
+              <i class="fa-solid fa-file-contract text-slate-500 w-4 text-center"></i>
+              <span>Executive Summary</span>
+            </a>
+            <a href="#gallery" onclick="toggleIndexNavMenu()" class="flex items-center gap-2.5 px-3 py-1.5 text-slate-300 hover:bg-slate-800 hover:text-white transition text-[11px]">
+              <i class="fa-solid fa-images text-slate-500 w-4 text-center"></i>
+              <span>Photo Showcase</span>
+            </a>
+            <a href="#pillars" onclick="toggleIndexNavMenu()" class="flex items-center gap-2.5 px-3 py-1.5 text-slate-300 hover:bg-slate-800 hover:text-white transition text-[11px]">
+              <i class="fa-solid fa-cubes text-slate-500 w-4 text-center"></i>
+              <span>Core Pillars</span>
+            </a>
+            <a href="#architecture" onclick="toggleIndexNavMenu()" class="flex items-center gap-2.5 px-3 py-1.5 text-slate-300 hover:bg-slate-800 hover:text-white transition text-[11px]">
+              <i class="fa-solid fa-network-wired text-slate-500 w-4 text-center"></i>
+              <span>Software & GIS Architecture</span>
+            </a>
+            <a href="#sensors" onclick="toggleIndexNavMenu()" class="flex items-center gap-2.5 px-3 py-1.5 text-slate-300 hover:bg-slate-800 hover:text-white transition text-[11px]">
+              <i class="fa-solid fa-microchip text-slate-500 w-4 text-center"></i>
+              <span>IoT Early Warning Sensors</span>
+            </a>
+            <a href="#budget" onclick="toggleIndexNavMenu()" class="flex items-center gap-2.5 px-3 py-1.5 text-emerald-400 font-bold hover:bg-slate-800 transition text-[11px]">
+              <i class="fa-solid fa-calculator text-emerald-400 w-4 text-center"></i>
+              <span>Budget Allocation (100 Cr)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       SUB-NAV / TABLE OF CONTENTS
+       ========================================================================= -->
+  <nav class="sticky top-16 z-30 bg-slate-900/95 border-b border-slate-800/80 px-4 py-2 overflow-x-auto">
+    <div class="max-w-7xl mx-auto flex items-center justify-between text-xs font-medium text-slate-300 min-w-max gap-4">
+      <div class="flex items-center gap-1 sm:gap-2">
+        <a href="#summary" class="px-2.5 py-1 rounded hover:bg-slate-800 hover:text-emerald-300 transition">Executive Summary</a>
+        <a href="#gallery" class="px-2.5 py-1 rounded hover:bg-slate-800 hover:text-emerald-300 transition">Photo Showcase</a>
+        <a href="#pillars" class="px-2.5 py-1 rounded hover:bg-slate-800 hover:text-emerald-300 transition">Core Pillars</a>
+        <a href="#architecture" class="px-2.5 py-1 rounded hover:bg-slate-800 hover:text-emerald-300 transition">Software & GIS</a>
+        <a href="#network" class="px-2.5 py-1 rounded hover:bg-slate-800 hover:text-emerald-300 transition">Network Scale</a>
+        <a href="#sensors" class="px-2.5 py-1 rounded hover:bg-slate-800 hover:text-emerald-300 transition">IoT Sensors</a>
+        <a href="#logistics" class="px-2.5 py-1 rounded hover:bg-slate-800 hover:text-emerald-300 transition">Physical Logistics</a>
+        <a href="#budget" class="px-2.5 py-1 rounded hover:bg-slate-800 hover:text-emerald-300 transition font-bold text-emerald-400">Budget (100 Cr)</a>
+        <a href="#roadmap" class="px-2.5 py-1 rounded hover:bg-slate-800 hover:text-emerald-300 transition">Roadmap</a>
+      </div>
+      <div class="flex items-center gap-3 text-[11px] text-slate-400 font-mono">
+        <button onclick="startSlideShow()" class="text-teal-400 hover:text-teal-300 flex items-center gap-1">
+          <i class="fa-solid fa-play text-[10px]"></i> Launch Slide Show
+        </button>
+        <span>•</span>
+        <span>Budget: <strong class="text-emerald-400">100.00 Cr BDT</strong></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       MAIN DOCUMENT CONTAINER
+       ========================================================================= -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-12 flex-1">
+
+    <!-- HERO / BANNER HEADER -->
+    <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/40 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <!-- Seal & Project Reference -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-900/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-inner">
+            <i class="fa-solid fa-landmark text-2xl"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-mono tracking-widest uppercase text-emerald-400 font-bold">Comprehensive Technical Overview</span>
+            <h2 class="text-sm font-semibold text-slate-200">Ministry of Disaster Management and Relief (MoDMR)</h2>
+            <p class="text-xs text-slate-400">Government of the People's Republic of Bangladesh</p>
+          </div>
+        </div>
+        <div class="flex flex-col sm:items-end">
+          <span class="text-xs text-slate-400">Project Reference: <span class="font-mono text-slate-200">MoDMR-GS-AI-2026/01</span></span>
+          <span class="text-xs text-slate-400">Classification: <span class="text-emerald-400 font-semibold">Priority National Infrastructure</span></span>
+          <span class="text-xs text-slate-400">Execution Timeline: <span class="text-slate-200 font-semibold">Live in 1–2 Months (Multi-Decade Scaling)</span></span>
+        </div>
+      </div>
+
+      <!-- Hero Title & Slide Show Trigger -->
+      <div class="mt-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div class="space-y-3 flex-1">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-800/80 text-emerald-300 text-xs font-semibold">
+            <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+            Life-Safety, Early Warning & Automated Relief Allocation
+          </div>
+          <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Project Overview: <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">GreenSignal AI</span>
+          </h1>
+          <p class="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
+            National Automated Disaster Response, Early Warning & Resource Allocation Infrastructure connecting field responders, Upazila operations hubs, and nationwide emergency command networks. Core application connects to existing data within 1–2 months.
+          </p>
+        </div>
+
+        <!-- Hero Presentation Action Card -->
+        <div class="bg-slate-950/80 border border-emerald-500/30 rounded-2xl p-5 shrink-0 flex flex-col items-center text-center max-w-xs w-full shadow-xl">
+          <div class="w-12 h-12 rounded-full bg-teal-900/60 border border-teal-500/40 flex items-center justify-center text-teal-300 text-xl mb-3">
+            <i class="fa-solid fa-chalkboard-user"></i>
+          </div>
+          <h3 class="text-sm font-bold text-white">Interactive Slide Show</h3>
+          <p class="text-xs text-slate-400 mt-1 mb-4">Present all 10 project modules, hardware specs, and budget items seamlessly.</p>
+          <button onclick="startSlideShow()" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white font-extrabold text-xs shadow-lg shadow-teal-700/30 transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-play"></i>
+            <span>Start Slide Show</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KEY OUTLAY METRICS GRID -->
+      <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-4">
+          <p class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Total Project Outlay</p>
+          <p class="text-xl sm:text-2xl font-black text-emerald-400 mt-1">100.00 Cr</p>
+          <p class="text-[10px] text-emerald-500/90 font-mono">Bangladeshi Taka (BDT)</p>
+        </div>
+
+        <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-4">
+          <p class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">App Deployment Speed</p>
+          <p class="text-xl sm:text-2xl font-black text-white mt-1">1–2 Mo</p>
+          <p class="text-[10px] text-emerald-400 font-mono">Live Data Connected</p>
+        </div>
+
+        <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-4">
+          <p class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Operations Hubs</p>
+          <p class="text-xl sm:text-2xl font-black text-white mt-1">Nationwide</p>
+          <p class="text-[10px] text-slate-400">Upazila Hubs & Relief Silos</p>
+        </div>
+
+        <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-4">
+          <p class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Target Uptime</p>
+          <p class="text-xl sm:text-2xl font-black text-cyan-400 mt-1">99%+</p>
+          <p class="text-[10px] text-slate-400">Tier-IV + BDIX + Starlink</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Bar -->
+      <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-950/70 border border-emerald-800/60 flex items-center justify-center text-emerald-400 text-lg">
+            <i class="fa-solid fa-images"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-200">Elaborate Visual Project Overview</h4>
+            <p class="text-[11px] text-slate-400">Complete specifications with dedicated picture placements and customizable assets in <code class="text-emerald-300 font-mono">/public/images/</code>.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="startSlideShow()" class="w-full sm:w-auto text-center px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold shadow transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-play"></i>
+            <span>Launch Slide Show</span>
+          </button>
+          <a href="/api/proposal/download" download="GreenSignal_AI_Project_Proposal.pdf" class="w-full sm:w-auto text-center px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Download PDF</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         PICTURE SHOWCASE & ASSET GALLERY SECTION
+         ========================================================================= -->
+    <section id="gallery" class="space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">
+            <i class="fa-solid fa-camera"></i>
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Project Visual Showcase & Physical Infrastructure</h2>
+            <p class="text-xs text-slate-400">Photos & technical diagrams from the <code class="text-emerald-400 font-mono">/public/images/</code> asset directory</p>
+          </div>
+        </div>
+        <span class="text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
+          Folder: <span class="text-emerald-400 font-bold">/public/images/</span>
+        </span>
+      </div>
+
+      <!-- Main Photo Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Picture 1: Command Center -->
+        <div class="image-zoom-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col">
+          <div class="relative bg-slate-950 h-52 overflow-hidden flex items-center justify-center">
+            <img src="/images/disaster_command_center.jpg" alt="National Disaster Emergency Command Room" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-[10px] font-mono text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+              <i class="fa-solid fa-tower-observation text-emerald-400"></i> disaster_command_center.jpg
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-white">24/7 National Emergency Command Hub</h4>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                Centralized tactical video walls mirroring Upazila operations hubs, live hydrometric telemetry data, and real-time emergency coordination.
+              </p>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>Location: Command Center</span>
+              <span class="text-emerald-400 font-bold">Upazila Video Links</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Picture 2: Environmental IoT Multi-Sensing Array -->
+        <div class="image-zoom-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col">
+          <div class="relative bg-slate-950 h-52 overflow-hidden flex items-center justify-center">
+            <img src="/images/iot_river_sensors.jpg" alt="Multi-Type Environmental IoT Telemetry Sensors" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-[10px] font-mono text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30 flex items-center gap-1">
+              <i class="fa-solid fa-microchip text-cyan-400"></i> iot_river_sensors.jpg
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-white">Multi-Type Environmental Sensors</h4>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                Industrial IoT multi-sensing arrays integrating non-contact river radar gauges, automated rain gauges, embankment piezometers, and compact weather stations delivering continuous ground-truth telemetry.
+              </p>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>Deployments: Nationwide Grid</span>
+              <span class="text-emerald-400 font-bold">Multi-Sensor Array</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Picture 3: Union Buffer Silo -->
+        <div class="image-zoom-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col">
+          <div class="relative bg-slate-950 h-52 overflow-hidden flex items-center justify-center">
+            <img src="/images/relief_warehouse_silo.jpg" alt="Climate-Hardened Union Buffer Silo" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-[10px] font-mono text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+              <i class="fa-solid fa-warehouse text-emerald-400"></i> relief_warehouse_silo.jpg
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-white">Union Relief Buffer Warehouse & Silo</h4>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                Elevated flood-proof plinth with hermetic grain storage silos and solar WHO cold-chain medical units.
+              </p>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>Facilities: Relief Warehouses</span>
+              <span class="text-teal-400 font-bold">Hermetic Storage</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Picture 4: Starlink Satellite Comms -->
+        <div class="image-zoom-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col">
+          <div class="relative bg-slate-950 h-52 overflow-hidden flex items-center justify-center">
+            <img src="/images/starlink_telemetry_network.jpg" alt="Starlink Satellite Comms & Telecom Grid" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-[10px] font-mono text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/30 flex items-center gap-1">
+              <i class="fa-solid fa-satellite-dish text-cyan-400"></i> starlink_telemetry_network.jpg
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-white">Starlink Satellite Comms & Telco Grid</h4>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                Starlink satellite terminal backup ensuring 99% uptime for each command center along with private APN mobile data across operators.
+              </p>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>Coverage: Nationwide</span>
+              <span class="text-cyan-400 font-bold">99% Uptime</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Picture 5: Field Worker Mobile App -->
+        <div class="image-zoom-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col">
+          <div class="relative bg-slate-950 h-52 overflow-hidden flex items-center justify-center">
+            <img src="/images/field_worker_mobile_app.jpg" alt="Field Responder Mobile App" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-[10px] font-mono text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+              <i class="fa-solid fa-mobile-screen-button text-emerald-400"></i> field_worker_mobile_app.jpg
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-white">Offline-First Field Responder PWA</h4>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                Empowering field responders with offline QR relief scanning, GPS distress beacons, and local evacuation routes.
+              </p>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>Users: Field Responders</span>
+              <span class="text-emerald-400 font-bold">Offline Sync</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Picture 6: Flood Evacuation -->
+        <div class="image-zoom-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col">
+          <div class="relative bg-slate-950 h-52 overflow-hidden flex items-center justify-center">
+            <img src="/images/flood_evacuation_rescue.jpg" alt="Flood Evacuation & Rescue Teams" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-[10px] font-mono text-amber-400 px-2 py-0.5 rounded border border-amber-500/30 flex items-center gap-1">
+              <i class="fa-solid fa-life-ring text-amber-400"></i> flood_evacuation_rescue.jpg
+            </span>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-white">Grassroots Evacuation & Rescue Fleet</h4>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                Coordinated dispatch connecting emergency responders, Fire Service rescue boats, and local community volunteers.
+              </p>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+              <span>Responders: Trained Leads</span>
+              <span class="text-amber-400 font-bold">Rapid Mobilization</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Guide Note for User Image Uploads -->
+      <div class="bg-emerald-950/40 border border-emerald-500/30 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-3 text-emerald-300">
+          <i class="fa-solid fa-folder-open text-lg text-emerald-400"></i>
+          <div>
+            <p class="font-bold text-white">How to replace with your own photos:</p>
+            <p class="text-slate-300 text-[11px]">Upload or place your JPG / PNG images directly into the <code class="bg-slate-900 px-1.5 py-0.5 rounded text-emerald-400 font-mono">/public/images/</code> directory. Full details in <code class="font-mono text-emerald-300">README.txt</code>.</p>
+          </div>
+        </div>
+        <a href="/public/images/README.txt" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-800/80 hover:bg-emerald-700 text-white font-bold transition text-xs shrink-0">
+          View Image Slot Guide
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         1. EXECUTIVE SUMMARY & STRATEGIC SCOPE
+         ========================================================================= -->
+    <section id="summary" class="space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">1</div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Executive Summary & Strategic Scope</h2>
+        </div>
+        <button onclick="startSlideShow(0)" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 font-semibold">
+          <i class="fa-solid fa-play text-[10px]"></i> View as Slide
+        </button>
+      </div>
+
+      <div class="prose prose-invert max-w-none text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>
+          Bangladesh faces recurring severe hydro-meteorological shocks—including monsoonal flash floods across the Surma-Meghna-Jamuna basins, Bay of Bengal cyclone storm surges, and localized waterlogging. While the Cyclone Preparedness Programme (CPP) and Bangladesh Meteorological Department (BMD) provide macroscopic forecasting, a critical operational gap exists between early forecast issuance, localized sensor verification, and automated last-mile disaster relief dispatch.
+        </p>
+        <p>
+          <strong class="text-white">GreenSignal AI</strong> establishes a unified physical and digital infrastructure connecting grassroots field workers, Upazila operations coordinators, and national ministry executives. While complete nationwide physical deployment across all remote channels is a multi-decade endeavor, the core GreenSignal AI software platform is engineered to be fully operational and connecting to existing meteorological and hydrological data within <strong>1 to 2 months</strong>.
+        </p>
+      </div>
+
+      <!-- Core Pillars Grid -->
+      <div id="pillars" class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-2.5">
+          <div class="flex items-center gap-2.5 text-emerald-400">
+            <i class="fa-solid fa-users-gear text-base"></i>
+            <h3 class="text-sm font-bold text-white">Multi-Tier Role Applications</h3>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Tailored client experiences for Field Responders (low-bandwidth/offline-first PWA & mobile app), Upazila/District Command Coordinators (tactical GIS and relief allocation suite), and Ministry Personnel (macro analytics, resource rebalancing, and national siren broadcast).
+          </p>
+        </div>
+
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-2.5">
+          <div class="flex items-center gap-2.5 text-teal-400">
+            <i class="fa-solid fa-warehouse text-base"></i>
+            <h3 class="text-sm font-bold text-white">Physical Infrastructure</h3>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            <strong>Upazila operations hubs</strong> and climate-hardened <strong>Union relief warehouses and buffer silos</strong> equipped with solar-powered cold-chain medical storage and airtight grain preservation.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-2.5">
+          <div class="flex items-center gap-2.5 text-cyan-400">
+            <i class="fa-solid fa-tower-broadcast text-base"></i>
+            <h3 class="text-sm font-bold text-white">Automated Environmental Sensor Network</h3>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            <strong>Automated IoT telemetry stations</strong> across river basins, coastal surge points, and sluices providing 24/7 autonomous ground truth without relying on human observer presence during severe weather.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-2.5">
+          <div class="flex items-center gap-2.5 text-amber-400">
+            <i class="fa-solid fa-network-wired text-base"></i>
+            <h3 class="text-sm font-bold text-white">Integration & Modernization</h3>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Ingests existing telemetry from BMD Doppler radars, FFWC hydrologic gauges, and SPARRSO satellite data, modernizing manual relief distribution into biometric and QR-code verified workflows.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         2. SOFTWARE ARCHITECTURE & LIVE CODEBASE WALKTHROUGH
+         ========================================================================= -->
+    <section id="architecture" class="space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">2</div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Software Architecture & Live Codebase Walkthrough</h2>
+        </div>
+        <button onclick="startSlideShow(3)" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 font-semibold">
+          <i class="fa-solid fa-play text-[10px]"></i> View as Slide
+        </button>
+      </div>
+
+      <p class="text-slate-300 text-sm leading-relaxed">
+        The GreenSignal AI digital platform is built on an enterprise-grade <span class="text-emerald-400 font-semibold">TypeScript/Node.js microservices framework</span> paired with <span class="text-emerald-400 font-semibold">PostgreSQL</span>, <span class="text-emerald-400 font-semibold">Prisma ORM</span>, and <span class="text-emerald-400 font-semibold">Socket.io</span> real-time event streaming:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Field Worker -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-400 font-mono">CLIENT LAYER</span>
+            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono">PWA / Android</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">Field Worker Application</h4>
+          <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+            <li>Offline-first execution utilizing client-side caching (IndexedDB/Service Workers) ensuring full operational continuity under intermittent 2G/EDGE connectivity.</li>
+            <li>GPS-tagged emergency distress reporting and survivor evacuation routing.</li>
+            <li>QR-code verified relief handoffs eliminating duplicate ration distribution.</li>
+          </ul>
+        </div>
+
+        <!-- Coordinator Tactical Suite -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-teal-400 font-mono">COMMAND SUITE</span>
+            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono">public/platform.html</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">Coordinator Tactical Suite & GIS</h4>
+          <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+            <li>Interactive Leaflet GIS mapping rendering nationwide upazila disaster nodes, relief shelters, and live water-level telemetry.</li>
+            <li>Relief allocation optimization engine calculating food grain, potable water, medical supplies, and temporary shelter kits against real-time population density.</li>
+            <li>District-level bounding zoom and automated resource shortfall flagging.</li>
+          </ul>
+        </div>
+
+        <!-- Privacy Isolated Messenger -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-indigo-400 font-mono">REAL-TIME LAYER</span>
+            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono">src/services/messaging.ts</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">Privacy-Isolated Real-Time Messenger</h4>
+          <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+            <li>JWT-authenticated Socket.io rooms separate the shared responder channel, private direct conversations, and disaster incident groups scoped to Bangladesh administrative areas.</li>
+            <li>Browser-side AES-GCM message encryption, RSA-OAEP key wrapping, and RSA-PSS sender signatures; the server stores ciphertext and a recovery-key-encrypted private-key backup.</li>
+            <li>Debounced responder directory search, explicit group membership, and persisted incident, location, and message records.</li>
+          </ul>
+        </div>
+
+        <!-- Relational Data Model -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-cyan-400 font-mono">DATA LAYER</span>
+            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono">prisma/schema.prisma</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">Relational Data Model & PostgreSQL</h4>
+          <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+            <li>Normalized schemas managing <code class="text-cyan-300">DistrictNode</code>, <code class="text-cyan-300">User</code>, <code class="text-cyan-300">ReliefCenter</code>, <code class="text-cyan-300">EnvironmentalSensor</code>, <code class="text-cyan-300">DisasterAlert</code>, <code class="text-cyan-300">ShelterAllocation</code>, and <code class="text-cyan-300">ChatMessage</code>.</li>
+            <li>Foreign key cascades and indexes enabling sub-millisecond lookups under crisis traffic.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. NETWORK INFRASTRUCTURE FOR MULTI-MILLION USER SCALE
+         ========================================================================= -->
+    <section id="network" class="space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">3</div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Network Infrastructure for Multi-Million User Scale</h2>
+        </div>
+        <button onclick="startSlideShow(4)" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 font-semibold">
+          <i class="fa-solid fa-play text-[10px]"></i> View as Slide
+        </button>
+      </div>
+
+      <p class="text-slate-300 text-sm leading-relaxed">
+        To guarantee <strong class="text-white">99% uptime</strong> across all emergency operations hubs during severe cyclone landfalls and national flood crises:
+      </p>
+
+      <div class="space-y-4">
+        <!-- Point 1: Tier-IV National Data Center Hosting -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-center gap-5">
+          <div class="w-full md:w-56 h-36 rounded-xl overflow-hidden shrink-0 border border-slate-700/80 bg-slate-950">
+            <img src="/images/datacenter_tier4.jpg" alt="Tier-IV National Data Center" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-2 flex-1">
+            <div class="flex items-center gap-2 text-indigo-400">
+              <i class="fa-solid fa-server"></i>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider">Tier-IV National Data Center Hosting</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Primary deployment hosted in the <strong>Bangladesh Computer Council (BCC) Tier-IV National Data Center</strong> (Kaliakoir, Gazipur) featuring dual 2N redundant electrical feeds, seismic isolation dampers, and active-active disaster recovery failover.
+            </p>
+            <div class="text-[11px] font-mono text-indigo-300 bg-indigo-950/50 px-2.5 py-1 rounded border border-indigo-800/40 inline-block">
+              Redundancy: 2N Hot Standby Cluster
+            </div>
+          </div>
+        </div>
+
+        <!-- Point 2: Global Edge & BDIX Anycast Routing -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-center gap-5">
+          <div class="w-full md:w-56 h-36 rounded-xl overflow-hidden shrink-0 border border-slate-700/80 bg-slate-950">
+            <img src="/images/edge_network_routing.jpg" alt="Global Edge & BDIX Anycast Peering" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-2 flex-1">
+            <div class="flex items-center gap-2 text-emerald-400">
+              <i class="fa-solid fa-shield-virus"></i>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider">Global Edge & BDIX Anycast Routing</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Edge layer terminating SSL, filtering DDoS attacks (up to 500 Gbps), and serving static web assets directly through the <strong>Bangladesh Internet Exchange (BDIX)</strong> domestic peering fabric for ultra-low sub-15ms latency across all divisions.
+            </p>
+            <div class="text-[11px] font-mono text-emerald-300 bg-emerald-950/50 px-2.5 py-1 rounded border border-emerald-800/40 inline-block">
+              Latency: &lt; 15ms Domestic Routing
+            </div>
+          </div>
+        </div>
+
+        <!-- Point 3: Kubernetes Autoscaling & In-Memory Cache Grid -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-center gap-5">
+          <div class="w-full md:w-56 h-36 rounded-xl overflow-hidden shrink-0 border border-slate-700/80 bg-slate-950">
+            <img src="/images/cloud_cluster_k8s.jpg" alt="Kubernetes Autoscaling Cluster" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-2 flex-1">
+            <div class="flex items-center gap-2 text-cyan-400">
+              <i class="fa-solid fa-cubes"></i>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider">Kubernetes Autoscaling & In-Memory Cache Grid</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Microservice compute pods dynamically scale instances on demand via Horizontal Pod Autoscalers (HPA). A distributed Redis Enterprise Cluster powers real-time pub/sub event broadcasting, sustaining millions of persistent connections without packet drops.
+            </p>
+            <div class="text-[11px] font-mono text-cyan-300 bg-cyan-950/50 px-2.5 py-1 rounded border border-cyan-800/40 inline-block">
+              Capacity: High-Volume Concurrent WebSockets
+            </div>
+          </div>
+        </div>
+
+        <!-- Point 4: Time-Series Telemetry Ingestion -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-center gap-5">
+          <div class="w-full md:w-56 h-36 rounded-xl overflow-hidden shrink-0 border border-slate-700/80 bg-slate-950">
+            <img src="/images/timeseries_db_stream.jpg" alt="Time-Series Telemetry Ingestion" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-2 flex-1">
+            <div class="flex items-center gap-2 text-teal-400">
+              <i class="fa-solid fa-database"></i>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider">Time-Series Telemetry Ingestion (TimescaleDB & PgBouncer)</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              High-velocity PostgreSQL hyper-tables continuously ingest sensor telemetry readings from river radar gauges, rain sensors, and piezometers with real-time anomaly detection and automated 7-day downsampled rollups.
+            </p>
+            <div class="text-[11px] font-mono text-teal-300 bg-teal-950/50 px-2.5 py-1 rounded border border-teal-800/40 inline-block">
+              Throughput: Continuous High-Velocity Sensor Ingestion
+            </div>
+          </div>
+        </div>
+
+        <!-- Point 5: Starlink Satellite Integration & 99% Uptime Command Hubs -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-center gap-5">
+          <div class="w-full md:w-56 h-36 rounded-xl overflow-hidden shrink-0 border border-slate-700/80 bg-slate-950">
+            <img src="/images/starlink_command_dish.jpg" alt="Starlink Satellite Integration" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-2 flex-1">
+            <div class="flex items-center gap-2 text-amber-400">
+              <i class="fa-solid fa-satellite-dish"></i>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider">Starlink Satellite Integration & 99% Uptime Command Hubs</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Dedicated private APN (Access Point Name) with zero-rated responder data across mobile network operators. <strong>Each command center will be equipped with Starlink satellite terminals to guarantee 99% uptime</strong> during severe cyclonic landfalls, terrestrial fiber cuts, and cellular tower blackouts, backed by solar-powered LoRaWAN mesh gateways.
+            </p>
+            <div class="text-[11px] font-mono text-amber-300 bg-amber-950/50 px-2.5 py-1 rounded border border-amber-800/40 inline-block">
+              Connectivity: Starlink Satellite Backup • Guaranteed 99% Uptime
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. ENVIRONMENTAL SENSOR NETWORK & HARDWARE DATASHEET
+         ========================================================================= -->
+    <section id="sensors" class="space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">4</div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Environmental Sensor Network & Hardware Datasheet</h2>
+        </div>
+        <button onclick="startSlideShow(5)" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 font-semibold">
+          <i class="fa-solid fa-play text-[10px]"></i> View as Slide
+        </button>
+      </div>
+
+      <p class="text-slate-300 text-sm leading-relaxed">
+        The project deploys an <strong class="text-white">industrial-grade automated IoT sensor network</strong> across river basins, barrage sluices, and coastal storm-surge corridors:
+      </p>
+
+      <!-- Hardware Table -->
+      <div class="border border-slate-800 rounded-2xl overflow-hidden shadow-lg">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-slate-900/90 text-slate-200 uppercase font-mono text-[11px] border-b border-slate-800">
+              <tr>
+                <th class="px-4 py-3 font-semibold">Sensor Category</th>
+                <th class="px-4 py-3 font-semibold">Proposed Device Model</th>
+                <th class="px-4 py-3 font-semibold">Technical Specifications</th>
+                <th class="px-4 py-3 font-semibold">Target Deployment Locations</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/80">
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3 font-semibold text-white">Radar Water Level Sensor</td>
+                <td class="px-4 py-3 font-mono text-emerald-400">OTT RLS / Vega VEGAPULS C21</td>
+                <td class="px-4 py-3">Non-contact 26 GHz radar, ±2 mm accuracy, 0–35 m range, SDI-12 / Modbus interface</td>
+                <td class="px-4 py-3 font-medium text-slate-200">Major river bridges, barrage sluices, and flood embankments</td>
+              </tr>
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3 font-semibold text-white">Automated Rain Gauge (ARG)</td>
+                <td class="px-4 py-3 font-mono text-emerald-400">Campbell Scientific TE525MM</td>
+                <td class="px-4 py-3">Tipping bucket mechanism, 0.1 mm orifice resolution, dual-reed switch, IP67 enclosure</td>
+                <td class="px-4 py-3 font-medium text-slate-200">Upazila weather stations and landslide-prone hilly zones</td>
+              </tr>
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3 font-semibold text-white">Embankment Pore Pressure</td>
+                <td class="px-4 py-3 font-mono text-emerald-400">RST Instruments VW2100</td>
+                <td class="px-4 py-3">Vibrating wire piezometer, 0–500 kPa range, transient embankment breach detection</td>
+                <td class="px-4 py-3 font-medium text-slate-200">Coastal polders and high-erosion riverbank corridors</td>
+              </tr>
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3 font-semibold text-white">Tidal & Storm Surge Gauge</td>
+                <td class="px-4 py-3 font-mono text-emerald-400">SonTek Argonaut-XR / Aanderaa SeaGuard</td>
+                <td class="px-4 py-3">Acoustic doppler pressure + wave velocity sensor, 0–20 m depth, marine antifouling</td>
+                <td class="px-4 py-3 font-medium text-slate-200">Coastal inlets, estuaries (Khulna, Barishal, Chittagong)</td>
+              </tr>
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3 font-semibold text-white">Compact Weather Station</td>
+                <td class="px-4 py-3 font-mono text-emerald-400">Vaisala WXT536 Multi-Sensor</td>
+                <td class="px-4 py-3">Ultrasonic wind speed/direction, barometric pressure, temperature, relative humidity</td>
+                <td class="px-4 py-3 font-medium text-slate-200">Coastal cyclone tracking towers and regional airfields</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-slate-900/60 p-3.5 border-t border-slate-800 text-[11px] text-slate-400 flex items-center gap-2">
+          <i class="fa-solid fa-microchip text-emerald-400"></i>
+          <span><strong>Solar RTU Unit:</strong> Every cluster connects to an industrial IP68 RTU with an ARM Cortex-M4 microcontroller, 4G/LTE Cat-M1/NB-IoT modem, LoRa transceiver, 40W solar panel, and 24Ah LiFePO4 battery providing <strong>21 days of operation without sunlight</strong>.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. PHYSICAL LOGISTICS: OFFICES, RELIEF CENTERS & WAREHOUSES
+         ========================================================================= -->
+    <section id="logistics" class="space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">5</div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Physical Logistics: Offices, Relief Centers & Warehouses</h2>
+        </div>
+        <button onclick="startSlideShow(6)" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 font-semibold">
+          <i class="fa-solid fa-play text-[10px]"></i> View as Slide
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Upazila Operations Hubs -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-800 flex items-center justify-center text-emerald-400">
+              <i class="fa-solid fa-building-shield text-lg"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white">Upazila Operations Hubs</h3>
+              <p class="text-xs text-emerald-400 font-mono">Decentralized Tactical Command</p>
+            </div>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2.5">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+              <span><strong>Tactical Command Rooms:</strong> Equipped with video walls mirroring live GreenSignal AI GIS telemetry, sensor alerts, and volunteer positions.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+              <span><strong>Mission Critical Comms:</strong> Dedicated Starlink satellite terminals ensuring 99% uptime and VHF base station radios connecting directly to national disaster centers.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+              <span><strong>Resilient Power:</strong> Hybrid solar-inverter systems with automated diesel generator backup providing uncompromised continuity.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Union Relief Warehouses -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-950 border border-teal-800 flex items-center justify-center text-teal-400">
+              <i class="fa-solid fa-boxes-packing text-lg"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white">Union Relief Buffer Warehouses & Silos</h3>
+              <p class="text-xs text-teal-400 font-mono">Last-Mile Lifeline Stocks</p>
+            </div>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2.5">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-teal-400 mt-0.5"></i>
+              <span><strong>Elevated Plinth Structures:</strong> Constructed safely above historical flood lines to prevent inundation of emergency stocks.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-teal-400 mt-0.5"></i>
+              <span><strong>Hermetic Grain Silos & Cold-Chain:</strong> Moisture-controlled storage for rice/lentils, plus WHO PQS-certified solar refrigeration for antivenom, vaccines, and IV fluids.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-teal-400 mt-0.5"></i>
+              <span><strong>Clean Water Pods & RFID Tracking:</strong> Solar RO plants producing potable drinking water; GS1 barcode & RFID tracking from procurement to handoff.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Personnel & Training Callout -->
+      <div class="bg-gradient-to-r from-emerald-950/40 via-slate-900 to-indigo-950/30 border border-slate-800 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <h4 class="text-sm font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-graduation-cap text-emerald-400"></i>
+            <span>Nationwide Personnel Training & Capacity Building</span>
+          </h4>
+          <p class="text-xs text-slate-300">
+            Mandatory hands-on certification for <strong>Ministry personnel</strong>, <strong>NGO first responders</strong>, and <strong>grassroots leads</strong> across all operations hubs.
+          </p>
+        </div>
+        <span class="px-3 py-1 bg-emerald-900/70 text-emerald-300 text-xs font-mono font-bold rounded-lg border border-emerald-700/60 shrink-0">
+          Capacity Building Core
+        </span>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. FINANCIAL BUDGET BREAKDOWN (100.00 CRORE BDT)
+         ========================================================================= -->
+    <section id="budget" class="space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">6</div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Financial Budget Breakdown (BDT 100.00 Crore)</h2>
+        </div>
+        <button onclick="startSlideShow(7)" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 font-semibold">
+          <i class="fa-solid fa-play text-[10px]"></i> View as Slide
+        </button>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <p class="text-slate-300 text-sm leading-relaxed">
+          The budget is strictly capped at <strong class="text-emerald-400">BDT 100.00 Crore</strong>, supporting long-term phased deployment with the core application operational and connecting to existing data in 1–2 months:
+        </p>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-700/80 text-emerald-300 text-xs font-mono font-bold shrink-0">
+          <i class="fa-solid fa-lock text-emerald-400"></i> 100.00 Cr Ceiling Guaranteed
+        </span>
+      </div>
+
+      <!-- Budget Visual Chart Placement -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 overflow-hidden">
+        <img src="/images/budget_architecture_chart.jpg" alt="100 Crore BDT Budget Allocation Breakdown" class="w-full h-auto rounded-xl">
+      </div>
+
+      <!-- Budget Table -->
+      <div class="border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-slate-900/90 text-slate-200 uppercase font-mono text-[11px] border-b border-slate-800">
+              <tr>
+                <th class="px-4 py-3 font-semibold">Expenditure Head</th>
+                <th class="px-4 py-3 font-semibold">Scope of Supply & Implementation</th>
+                <th class="px-4 py-3 font-semibold text-right">CapEx (Cr)</th>
+                <th class="px-4 py-3 font-semibold text-right">OpEx (Cr)</th>
+                <th class="px-4 py-3 font-semibold text-right text-emerald-400">Total (Cr BDT)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/80">
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3.5 font-bold text-white">1. IoT Sensor Network</td>
+                <td class="px-4 py-3.5">Automated telemetry stations, solar kits, radar gauges, rain gauges, pore pressure sensors, civil mountings</td>
+                <td class="px-4 py-3.5 text-right font-mono">25.50</td>
+                <td class="px-4 py-3.5 text-right font-mono">2.50</td>
+                <td class="px-4 py-3.5 text-right font-mono font-bold text-emerald-400">28.00 Cr</td>
+              </tr>
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3.5 font-bold text-white">2. Physical Hubs & Warehouses</td>
+                <td class="px-4 py-3.5">Upazila operations hub retrofits, Union relief buffer warehouses and silos, cold-chain units, solar-inverter backup power</td>
+                <td class="px-4 py-3.5 text-right font-mono">23.00</td>
+                <td class="px-4 py-3.5 text-right font-mono">2.00</td>
+                <td class="px-4 py-3.5 text-right font-mono font-bold text-emerald-400">25.00 Cr</td>
+              </tr>
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3.5 font-bold text-white">3. Software, AI Models & Apps</td>
+                <td class="px-4 py-3.5">Worker PWA/Native apps, Coordinator desktop suite, National Ministry Dashboard, AI hydrological models</td>
+                <td class="px-4 py-3.5 text-right font-mono">11.50</td>
+                <td class="px-4 py-3.5 text-right font-mono">2.50</td>
+                <td class="px-4 py-3.5 text-right font-mono font-bold text-emerald-400">14.00 Cr</td>
+              </tr>
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3.5 font-bold text-white">4. Cloud & Telecom Infrastructure</td>
+                <td class="px-4 py-3.5">Tier-IV BCC hosting, Redis clusters, private APN data peering with mobile operators, Starlink satellite integration ensuring 99% uptime</td>
+                <td class="px-4 py-3.5 text-right font-mono">4.50</td>
+                <td class="px-4 py-3.5 text-right font-mono">7.50</td>
+                <td class="px-4 py-3.5 text-right font-mono font-bold text-emerald-400">12.00 Cr</td>
+              </tr>
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3.5 font-bold text-white">5. Nationwide Training & Drills</td>
+                <td class="px-4 py-3.5">Capacity building for field responders, Upazila Disaster Committees, simulation mock drills</td>
+                <td class="px-4 py-3.5 text-right font-mono">3.00</td>
+                <td class="px-4 py-3.5 text-right font-mono">8.00</td>
+                <td class="px-4 py-3.5 text-right font-mono font-bold text-emerald-400">11.00 Cr</td>
+              </tr>
+              <tr class="hover:bg-slate-900/50 transition">
+                <td class="px-4 py-3.5 font-bold text-white">6. QA, Security & Contingency</td>
+                <td class="px-4 py-3.5">CERT security audits, ISO compliance, hardware spares reserve, emergency price contingency</td>
+                <td class="px-4 py-3.5 text-right font-mono">6.00</td>
+                <td class="px-4 py-3.5 text-right font-mono">4.00</td>
+                <td class="px-4 py-3.5 text-right font-mono font-bold text-emerald-400">10.00 Cr</td>
+              </tr>
+            </tbody>
+            <!-- GRAND TOTAL ROW -->
+            <tfoot class="bg-slate-900 font-bold text-white border-t-2 border-emerald-500/60">
+              <tr>
+                <td class="px-4 py-4 text-xs tracking-wider uppercase">Total Project Outlay</td>
+                <td class="px-4 py-4 text-xs font-normal text-slate-300">National Implementation (Core Platform Live in 1–2 Months + Long-Term Multi-Decade Expansion)</td>
+                <td class="px-4 py-4 text-right font-mono text-sm">73.50 Cr</td>
+                <td class="px-4 py-4 text-right font-mono text-sm">26.50 Cr</td>
+                <td class="px-4 py-4 text-right font-mono text-base font-black text-emerald-400">100.00 Cr</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. IMPLEMENTATION ROADMAP (RAPID LAUNCH & LONG-TERM SCALING)
+         ========================================================================= -->
+    <section id="roadmap" class="space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">7</div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Implementation Roadmap (Rapid 1–2 Month Launch & Multi-Decade Scaling)</h2>
+        </div>
+        <button onclick="startSlideShow(8)" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 font-semibold">
+          <i class="fa-solid fa-play text-[10px]"></i> View as Slide
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-400 leading-relaxed">
+        While complete nationwide physical civil works and river basin sensor saturation is a multi-decade national endeavor, the core GreenSignal AI digital platform is architected to be fully operational and connecting to existing data streams within 1 to 2 months.
+      </p>
+
+      <div class="space-y-4">
+        <!-- Phase 1 -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="text-xs font-bold text-emerald-400 font-mono">PHASE 1 (MONTHS 01–02)</span>
+            <span class="text-[11px] text-slate-400">Target Milestone: Rapid Core Launch & Data Integration</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">Cloud Core, Live Data Ingestion & Command Center Operations</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Deployment of the core digital platform on Tier-IV cloud infrastructure, live API ingestion of existing BMD radar and FFWC hydrologic gauge data, activation of Upazila operations hubs with Starlink connectivity for 99% uptime, and field responder mobile PWA availability.
+          </p>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="text-xs font-bold text-teal-400 font-mono">PHASE 2 (MEDIUM-TERM EXPANSION)</span>
+            <span class="text-[11px] text-slate-400">Target Scope: Regional Hub Retrofits & Sensor Expansion</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">Regional Hub Expansion & Sensor Grid Rollout</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Progressive rollout of Upazila operations hubs, construction of flood-proof Union relief buffer warehouses and silos, installation of dedicated radar and rain gauge telemetry stations, and onboarding of grassroots responder networks.
+          </p>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="text-xs font-bold text-cyan-400 font-mono">PHASE 3 (LONG-TERM MULTI-DECADE HORIZON)</span>
+            <span class="text-[11px] text-slate-400">Target Scope: Complete Nationwide Delta Saturation</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">Nationwide Saturation & Inter-Agency Command Integration</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Continuous decadal scaling of high-density IoT telemetry across all delta river corridors and coastal polders, AI predictive hydro-meteorological model refinements, Starlink satellite network resilience, and multi-agency coordination with Armed Forces and emergency services.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SIGN-OFF & ACTION CARDS
+         ========================================================================= -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h3 class="text-base font-bold text-white">Project Overview Certification & Next Steps</h3>
+          <p class="text-xs text-slate-400">GreenSignal AI Technical & Implementation Consortium</p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs font-mono text-emerald-400">STATUS: READY FOR OPERATIONAL DEPLOYMENT</p>
+          <p class="text-[11px] text-slate-500">Document Hash: SHA256-GS-AI-2026-BGD-100CR</p>
+        </div>
+      </div>
+      <p class="text-xs text-slate-400 leading-relaxed">
+        This document represents the comprehensive turnkey technical and financial overview prepared for the Ministry of Disaster Management and Relief (MoDMR), Government of the People's Republic of Bangladesh. All hardware components, physical civil scopes, software licenses, and cloud capacities are verified within the non-negotiable <strong>BDT 100.00 Crore</strong> project ceiling.
+      </p>
+
+      <!-- Action buttons -->
+      <div class="pt-2 flex flex-wrap items-center gap-3">
+        <button onclick="startSlideShow()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white text-xs font-extrabold shadow-lg shadow-teal-700/30 transition flex items-center gap-2">
+          <i class="fa-solid fa-play"></i>
+          <span>Launch Interactive Slide Show</span>
+        </button>
+        <a href="/auth.html" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-700 transition flex items-center gap-2">
+          <i class="fa-solid fa-user-plus text-emerald-400"></i>
+          <span>Sign In / Field Sign Up</span>
+        </a>
+        <a href="/platform.html" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-700 transition flex items-center gap-2">
+          <i class="fa-solid fa-gauge-high text-teal-400"></i>
+          <span>Enter Live Tactical Command</span>
+        </a>
+        <a href="/api/proposal/download" download="GreenSignal_AI_Project_Proposal.pdf" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition flex items-center gap-2">
+          <i class="fa-solid fa-file-pdf text-rose-400"></i>
+          <span>Download PDF Document</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       INTERACTIVE SLIDE SHOW PRESENTATION MODAL
+       ========================================================================= -->
+  <div id="slideShowModal" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-lg hidden flex flex-col justify-between p-4 sm:p-8 select-none">
+    
+    <!-- Slide Show Top Bar -->
+    <div class="max-w-6xl w-full mx-auto flex items-center justify-between gap-4 border-b border-slate-800 pb-3">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+          <i class="fa-solid fa-tv text-xs"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-white">GreenSignal AI Presentation Mode</span>
+          <p class="text-[10px] text-slate-400 font-mono">Use Keyboard Arrows (← / →) or Spacebar</p>
+        </div>
+      </div>
+
+      <!-- Slide Counter & Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Progress Pills -->
+        <span id="slideCounterBadge" class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-950 border border-emerald-500/40 text-emerald-300">
+          Slide 1 of 10
+        </span>
+        
+        <!-- Auto Play Toggle -->
+        <button id="autoPlayBtn" onclick="toggleAutoPlay()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-play text-[10px]"></i>
+          <span id="autoPlayText">Auto-Play</span>
+        </button>
+
+        <!-- Close Slide Show Button -->
+        <button onclick="exitSlideShow()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-rose-950 hover:text-rose-400 text-slate-300 border border-slate-700 hover:border-rose-800/80 flex items-center justify-center transition" title="Exit Presentation (Esc)">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Slide Top Progress Line -->
+    <div class="max-w-6xl w-full mx-auto my-2">
+      <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+        <div id="slideProgressBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full transition-all duration-300" style="width: 10%;"></div>
+      </div>
+    </div>
+
+    <!-- Active Slide Stage Container -->
+    <div class="max-w-6xl w-full mx-auto flex-1 flex items-center justify-center my-4 overflow-y-auto custom-scrollbar">
+      <div id="slideContent" class="w-full max-w-5xl bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl transition-all duration-300">
+        <!-- Dynamic Slide Content Injected by JS -->
+      </div>
+    </div>
+
+    <!-- Slide Show Bottom Navigation Bar -->
+    <div class="max-w-6xl w-full mx-auto flex items-center justify-between gap-4 border-t border-slate-800 pt-3">
+      <button onclick="prevSlide()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-700 flex items-center gap-2 transition">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Previous</span>
+      </button>
+
+      <!-- Slide jump dots -->
+      <div id="slideDotsContainer" class="hidden sm:flex items-center gap-1.5">
+        <!-- Injected via JS -->
+      </div>
+
+      <button onclick="nextSlide()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
+        <span>Next Slide</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="border-t border-slate-800/80 bg-slate-950 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <p>GreenSignal AI — National Automated Disaster Response, Early Warning & Resource Allocation Infrastructure</p>
+      <p>Government of the People's Republic of Bangladesh • Ministry of Disaster Management and Relief (MoDMR)</p>
+      <div class="pt-2 flex items-center justify-center gap-4 text-[11px] text-slate-400">
+        <a href="/auth.html" class="hover:text-emerald-400 transition">User Sign In / Sign Up</a>
+        <span>•</span>
+        <a href="/platform.html" class="hover:text-emerald-400 transition">Tactical Command Platform</a>
+        <span>•</span>
+        <a href="/district-planner.html" class="hover:text-emerald-400 transition">Resource Planner</a>
+        <span>•</span>
+        <button onclick="startSlideShow()" class="text-teal-400 hover:underline">Presentation Slide Show</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       PRESENTATION SLIDES DATA & SCRIPT ENGINE
+       ========================================================================= -->
+  <script>
+    // Slide Definitions
+    const slidesData = [
+      {
+        tag: 'EXECUTIVE BRIEFING',
+        title: 'National Disaster Response & Resource Allocation Infrastructure',
+        subtitle: 'GreenSignal AI • Ministry of Disaster Management and Relief (MoDMR)',
+        image: '/images/disaster_command_center.jpg',
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div class="space-y-4">
+              <p class="text-sm text-slate-300 leading-relaxed">
+                A unified physical and digital emergency response infrastructure engineered for the Government of Bangladesh, connecting field responders, Upazila operations hubs, and Union relief buffer warehouses. Core application operational in 1–2 months.
+              </p>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
+                  <p class="text-[10px] text-slate-400 uppercase font-mono">Total Budget Ceiling</p>
+                  <p class="text-lg font-black text-emerald-400">100.00 Cr BDT</p>
+                </div>
+                <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800">
+                  <p class="text-[10px] text-slate-400 uppercase font-mono">App Launch</p>
+                  <p class="text-lg font-black text-white">1–2 Months</p>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-700 bg-slate-950">
+              <img src="/images/disaster_command_center.jpg" class="w-full h-56 object-cover" alt="Command Center">
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: 'THE VULNERABILITY CHALLENGE',
+        title: 'Bridging the Last-Mile Flood & Cyclone Early Warning Gap',
+        subtitle: 'From macroscopic radar forecasts to verified local ration delivery',
+        image: '/images/flood_evacuation_rescue.jpg',
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div class="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p>Bangladesh encounters severe recurring shocks: monsoonal flash floods across river basins, embankment erosion, and Bay of Bengal cyclone surges.</p>
+              <div class="space-y-2">
+                <div class="flex items-start gap-2 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
+                  <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-1"></i>
+                  <span><strong>The Operational Gap:</strong> Forecasts issued hours in advance often fail to trigger automated local supply prepositioning.</span>
+                </div>
+                <div class="flex items-start gap-2 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
+                  <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                  <span><strong>The AI Solution:</strong> Continuous telemetry coupled with algorithmic ration & medical allocation models.</span>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-700 bg-slate-950">
+              <img src="/images/flood_evacuation_rescue.jpg" class="w-full h-56 object-cover" alt="Flood Evacuation">
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: 'CORE ARCHITECTURE PILLARS',
+        title: 'Four Integrated Digital & Physical Pillars',
+        subtitle: 'Comprehensive nationwide coverage for all responder tiers',
+        image: '/images/edge_network_routing.jpg',
+        content: `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div class="bg-slate-950/70 p-4 rounded-xl border border-emerald-500/30 space-y-1.5">
+              <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+                <i class="fa-solid fa-users-gear"></i> 1. Multi-Tier Applications
+              </div>
+              <p class="text-slate-300">Offline PWA for field workers, Tactical GIS for Upazila commanders, National executive dashboards.</p>
+            </div>
+            <div class="bg-slate-950/70 p-4 rounded-xl border border-teal-500/30 space-y-1.5">
+              <div class="flex items-center gap-2 text-teal-400 font-bold text-sm">
+                <i class="fa-solid fa-warehouse"></i> 2. Physical Infrastructure
+              </div>
+              <p class="text-slate-300">Upazila Command Hubs + flood-proof Union Relief Buffer Warehouses with solar WHO cold chains.</p>
+            </div>
+            <div class="bg-slate-950/70 p-4 rounded-xl border border-cyan-500/30 space-y-1.5">
+              <div class="flex items-center gap-2 text-cyan-400 font-bold text-sm">
+                <i class="fa-solid fa-tower-broadcast"></i> 3. Automated IoT Telemetry
+              </div>
+              <p class="text-slate-300">Autonomous 26 GHz radar river gauges, automated rain gauges, and pore pressure piezometers.</p>
+            </div>
+            <div class="bg-slate-950/70 p-4 rounded-xl border border-amber-500/30 space-y-1.5">
+              <div class="flex items-center gap-2 text-amber-400 font-bold text-sm">
+                <i class="fa-solid fa-satellite-dish"></i> 4. Starlink & Telco Comms
+              </div>
+              <p class="text-slate-300">Starlink satellite backup in each command center ensuring 99% uptime with zero-rated private APN data.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: 'FIELD RESPONDER SUITE',
+        title: 'Offline-First Mobile PWA & QR Relief Distribution',
+        subtitle: 'Empowering grassroots responders in low-connectivity disaster zones',
+        image: '/images/field_worker_mobile_app.jpg',
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div class="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <ul class="space-y-2 list-disc list-inside">
+                <li><strong>Local IndexedDB Caching:</strong> Seamless offline execution on rugged Android and iOS devices.</li>
+                <li><strong>QR Beneficiary Verification:</strong> Prevents duplicate ration grabs and guarantees zero leakage in relief dispatch.</li>
+                <li><strong>GPS Distress Pins:</strong> One-tap SOS beacons with automatic nearest rescue & shelter routing.</li>
+              </ul>
+              <div class="p-3 bg-emerald-950/50 rounded-xl border border-emerald-500/40 text-emerald-300 text-xs font-mono">
+                ✓ Tested under 2G / EDGE and zero-connectivity environments
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-700 bg-slate-950">
+              <img src="/images/field_worker_mobile_app.jpg" class="w-full h-56 object-cover" alt="Mobile PWA">
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: 'ENTERPRISE CLOUD & SATELLITE',
+        title: 'BCC Tier-IV Hosting & Starlink 99% Uptime',
+        subtitle: 'Zero single-point-of-failure mission-critical architecture',
+        image: '/images/datacenter_tier4.jpg',
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+              <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+                <h5 class="font-bold text-white uppercase text-[11px]">Primary Hosting: BCC Gazipur</h5>
+                <p>Tier-IV Certified National Data Center with hot active-active clustering.</p>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+                <h5 class="font-bold text-white uppercase text-[11px]">BDIX Anycast Edge</h5>
+                <p>Sub-15ms nationwide latency & 500 Gbps automated DDoS mitigation.</p>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+                <h5 class="font-bold text-white uppercase text-[11px]">Starlink Satellite Terminals</h5>
+                <p>Equipped at each command center to guarantee 99% uptime during power & fiber blackouts.</p>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-700 bg-slate-950">
+              <img src="/images/datacenter_tier4.jpg" class="w-full h-56 object-cover" alt="Tier-IV Datacenter">
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: 'IOT SENSOR SPECIFICATIONS',
+        title: 'Industrial Environmental Telemetry Stations',
+        subtitle: 'Autonomous 24/7 ground-truth environmental monitoring',
+        image: '/images/iot_river_sensors.jpg',
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between p-2 rounded-lg bg-slate-950 border border-slate-800">
+                <span class="font-bold text-white">OTT 26GHz Radar Water Sensor</span>
+                <span class="font-mono text-emerald-400">Bridge Mounts (±2mm)</span>
+              </div>
+              <div class="flex justify-between p-2 rounded-lg bg-slate-950 border border-slate-800">
+                <span class="font-bold text-white">Campbell Automated Rain Gauges</span>
+                <span class="font-mono text-emerald-400">Weather Stations (0.1mm)</span>
+              </div>
+              <div class="flex justify-between p-2 rounded-lg bg-slate-950 border border-slate-800">
+                <span class="font-bold text-white">Embankment Pore Piezometers</span>
+                <span class="font-mono text-emerald-400">Polder Breach Alert</span>
+              </div>
+              <div class="flex justify-between p-2 rounded-lg bg-slate-950 border border-slate-800">
+                <span class="font-bold text-white">SonTek Storm Surge Gauges</span>
+                <span class="font-mono text-emerald-400">Coastal Inlets</span>
+              </div>
+              <div class="flex justify-between p-2 rounded-lg bg-slate-950 border border-slate-800">
+                <span class="font-bold text-white">Vaisala Compact Weather Stations</span>
+                <span class="font-mono text-emerald-400">Cyclone Tracking</span>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-700 bg-slate-950">
+              <img src="/images/iot_river_sensors.jpg" class="w-full h-56 object-cover" alt="Environmental IoT Multi-Sensing Array">
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: 'PHYSICAL LOGISTICS & HUBS',
+        title: 'Upazila Operations Hubs & Union Relief Silos',
+        subtitle: 'Decentralized command & flood-proof emergency relief stock',
+        image: '/images/relief_warehouse_silo.jpg',
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div class="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+                <h5 class="font-bold text-white">Upazila Operations Hubs</h5>
+                <p class="text-xs text-slate-400">Tactical video walls, Starlink backup, VHF base stations, solar inverter backup.</p>
+              </div>
+              <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+                <h5 class="font-bold text-white">Union Relief Buffer Warehouses & Silos</h5>
+                <p class="text-xs text-slate-400">Elevated flood plinths, hermetic grain silos, solar WHO cold chains.</p>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-700 bg-slate-950">
+              <img src="/images/relief_warehouse_silo.jpg" class="w-full h-56 object-cover" alt="Union Silo">
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: 'FINANCIAL ALLOCATION',
+        title: 'BDT 100.00 Crore Guaranteed Budget Breakdown',
+        subtitle: 'Core application live in 1–2 months with long-term scaling',
+        image: '/images/budget_architecture_chart.jpg',
+        content: `
+          <div class="space-y-4">
+            <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
+              <img src="/images/budget_architecture_chart.jpg" class="w-full h-44 object-contain" alt="Budget Chart">
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800"><span class="text-slate-400 block">1. Sensors</span><strong class="text-emerald-400">28.00 Cr</strong></div>
+              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800"><span class="text-slate-400 block">2. Hubs & Silos</span><strong class="text-teal-400">25.00 Cr</strong></div>
+              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800"><span class="text-slate-400 block">3. Software & AI</span><strong class="text-cyan-400">14.00 Cr</strong></div>
+              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800"><span class="text-slate-400 block">4. Cloud & Starlink</span><strong class="text-blue-400">12.00 Cr</strong></div>
+              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800"><span class="text-slate-400 block">5. Training</span><strong class="text-purple-400">11.00 Cr</strong></div>
+              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800"><span class="text-slate-400 block">6. QA & Reserve</span><strong class="text-amber-400">10.00 Cr</strong></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: 'IMPLEMENTATION HORIZON',
+        title: 'Rapid 1–2 Month Launch & Multi-Decade Expansion',
+        subtitle: 'Core digital platform operational rapidly while physical infrastructure scales',
+        image: '/images/cloud_cluster_k8s.jpg',
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/40 space-y-2">
+              <span class="font-mono text-emerald-400 font-bold text-[10px]">PHASE 1 (MONTHS 01–02)</span>
+              <h5 class="font-bold text-white text-sm">Rapid Core Launch</h5>
+              <p class="text-slate-400">Core software live, connecting to existing BMD and FFWC data streams, pilot command hubs with Starlink.</p>
+            </div>
+            <div class="bg-slate-950 p-4 rounded-xl border border-teal-500/40 space-y-2">
+              <span class="font-mono text-teal-400 font-bold text-[10px]">PHASE 2 (EXPANSION)</span>
+              <h5 class="font-bold text-white text-sm">Hub Retrofits & Silos</h5>
+              <p class="text-slate-400">Progressive expansion of Upazila operations hubs, Union warehouses, and local responder networks.</p>
+            </div>
+            <div class="bg-slate-950 p-4 rounded-xl border border-cyan-500/40 space-y-2">
+              <span class="font-mono text-cyan-400 font-bold text-[10px]">PHASE 3 (MULTI-DECADE)</span>
+              <h5 class="font-bold text-white text-sm">Nationwide Saturation</h5>
+              <p class="text-slate-400">Complete river basin and coastal delta sensor saturation with 99% uptime Starlink command connectivity.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: 'NEXT STEPS & ACTION',
+        title: 'Interactive Command & Responder Portal',
+        subtitle: 'Ready for evaluation, tender verification, and live testing',
+        image: '/images/disaster_command_center.jpg',
+        content: `
+          <div class="text-center max-w-2xl mx-auto space-y-6">
+            <div class="w-16 h-16 rounded-3xl bg-emerald-900/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-3xl mx-auto shadow-xl">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-white">GreenSignal AI is Live & Operational</h4>
+              <p class="text-xs text-slate-300 mt-1">Explore the interactive tactical GIS suite or register a new responder profile.</p>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <a href="/platform.html" class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Open Tactical Command Suite</span>
+              </a>
+              <a href="/auth.html" class="px-5 py-3 rounded-xl bg-teal-700 hover:bg-teal-600 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Sign Up / Create Responder Profile</span>
+              </a>
+              <a href="/district-planner.html" target="_blank" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-compass-drafting"></i>
+                <span>Resource Planner</span>
+              </a>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    let currentSlideIndex = 0;
+    let autoPlayInterval = null;
+
+    function startSlideShow(startIndex = 0) {
+      currentSlideIndex = startIndex;
+      document.getElementById('slideShowModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      renderSlide();
+      initDots();
+    }
+
+    function exitSlideShow() {
+      document.getElementById('slideShowModal').classList.add('hidden');
+      document.body.style.overflow = '';
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+        document.getElementById('autoPlayText').textContent = 'Auto-Play';
+      }
+    }
+
+    function renderSlide() {
+      const slide = slidesData[currentSlideIndex];
+      const container = document.getElementById('slideContent');
+      const badge = document.getElementById('slideCounterBadge');
+      const progressBar = document.getElementById('slideProgressBar');
+
+      badge.textContent = `Slide ${currentSlideIndex + 1} of ${slidesData.length}`;
+      progressBar.style.width = `${((currentSlideIndex + 1) / slidesData.length) * 100}%`;
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          <div class="border-b border-slate-800 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 uppercase tracking-widest">${slide.tag}</span>
+              <h3 class="text-lg sm:text-2xl font-extrabold text-white mt-1.5">${slide.title}</h3>
+              <p class="text-xs text-slate-400">${slide.subtitle}</p>
+            </div>
+          </div>
+          <div class="py-2">
+            ${slide.content}
+          </div>
+        </div>
+      `;
+
+      updateDots();
+    }
+
+    function nextSlide() {
+      if (currentSlideIndex < slidesData.length - 1) {
+        currentSlideIndex++;
+      } else {
+        currentSlideIndex = 0; // Loop back
+      }
+      renderSlide();
+    }
+
+    function prevSlide() {
+      if (currentSlideIndex > 0) {
+        currentSlideIndex--;
+      } else {
+        currentSlideIndex = slidesData.length - 1;
+      }
+      renderSlide();
+    }
+
+    function toggleAutoPlay() {
+      const btnText = document.getElementById('autoPlayText');
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+        btnText.textContent = 'Auto-Play';
+      } else {
+        btnText.textContent = 'Pause';
+        autoPlayInterval = setInterval(() => {
+          nextSlide();
+        }, 5000);
+      }
+    }
+
+    function initDots() {
+      const dotsContainer = document.getElementById('slideDotsContainer');
+      dotsContainer.innerHTML = '';
+      slidesData.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.className = `w-2.5 h-2.5 rounded-full transition-all ${idx === currentSlideIndex ? 'bg-emerald-400 w-6' : 'bg-slate-700 hover:bg-slate-500'}`;
+        dot.onclick = () => {
+          currentSlideIndex = idx;
+          renderSlide();
+        };
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function updateDots() {
+      const dots = document.querySelectorAll('#slideDotsContainer button');
+      dots.forEach((dot, idx) => {
+        dot.className = `w-2.5 h-2.5 rounded-full transition-all ${idx === currentSlideIndex ? 'bg-emerald-400 w-6' : 'bg-slate-700 hover:bg-slate-500'}`;
+      });
+    }
+
+    // Keyboard Shortcuts (Arrows, Space, Escape)
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('slideShowModal');
+      if (modal && !modal.classList.contains('hidden')) {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          e.preventDefault();
+          nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prevSlide();
+        } else if (e.key === 'Escape') {
+          exitSlideShow();
+        }
+      }
+    });
+
+    // Toggle Index Header Dropdown Menu
+    function toggleIndexNavMenu(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('indexNavMenuDropdown');
+      if (menu) {
+        menu.classList.toggle('hidden');
+      }
+    }
+
+    // Update Sign In / Log Out Buttons across Desktop Navbar & Mobile Dropdown
+    function updateAuthNavButtons() {
+      const user = JSON.parse(localStorage.getItem('greensignal_user') || 'null') || JSON.parse(localStorage.getItem('greensignal_auth_user') || 'null') || JSON.parse(localStorage.getItem('user') || 'null');
+      const desktopAuthContainer = document.getElementById('navbarAuthContainer');
+      const mobileAuthItem = document.getElementById('dropdownMobileAuthItem');
+
+      // Restrict messenger for citizens
+      const messengerBtn = document.getElementById('navMessengerBtn');
+      if (messengerBtn) {
+        if (user && user.role === 'CITIZEN') {
+          messengerBtn.classList.add('hidden');
+        } else {
+          messengerBtn.classList.remove('hidden');
+        }
+      }
+
+      if (user && (user.id || user.username)) {
+        const displayName = user.fullName ? user.fullName.split(' ')[0] : (user.username || 'User');
+        if (desktopAuthContainer) {
+          desktopAuthContainer.innerHTML = `
+            <button onclick="handlePlatformLogout()" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold text-rose-200 hover:text-white bg-rose-950/70 hover:bg-rose-900 border border-rose-700/60 transition shadow" title="Sign out of ${user.fullName || user.username}">
+              <i class="fa-solid fa-right-from-bracket text-rose-400"></i>
+              <span>Log Out</span>
+              <span class="bg-rose-900/80 text-rose-300 text-[10px] px-1.5 py-0.2 rounded font-mono max-w-[80px] truncate">${displayName}</span>
+            </button>
+          `;
+        }
+        if (mobileAuthItem) {
+          mobileAuthItem.innerHTML = `
+            <button onclick="handlePlatformLogout(); toggleIndexNavMenu();" class="w-full text-left flex items-center justify-between px-3 py-2 rounded-xl bg-rose-950/40 hover:bg-rose-950/70 border border-rose-900/60 text-rose-200 transition font-semibold">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <i class="fa-solid fa-right-from-bracket text-rose-400 w-4 text-center shrink-0"></i>
+                <span class="truncate">Log Out (${displayName})</span>
+              </div>
+              <span class="text-[10px] bg-rose-900/80 text-rose-300 border border-rose-800/80 px-1.5 py-0.5 rounded font-mono shrink-0">${user.role || 'USER'}</span>
+            </button>
+          `;
+        }
+      } else {
+        if (desktopAuthContainer) {
+          desktopAuthContainer.innerHTML = `
+            <a href="/auth.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-200 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition shadow" title="Sign In or Field Responder Sign Up">
+              <i class="fa-solid fa-user-shield text-emerald-400"></i>
+              <span>Sign In / Sign Up</span>
+            </a>
+          `;
+        }
+        if (mobileAuthItem) {
+          mobileAuthItem.innerHTML = `
+            <a href="/auth.html" class="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-200 transition font-semibold">
+              <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-user-shield text-emerald-400 w-4 text-center"></i>
+                <span>Sign In / Sign Up</span>
+              </div>
+              <i class="fa-solid fa-arrow-right text-[10px] text-slate-500"></i>
+            </a>
+          `;
+        }
+      }
+    }
+
+    // Handle User Log Out
+    function handlePlatformLogout() {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('greensignal_user');
+      localStorage.removeItem('greensignal_auth_user');
+      localStorage.removeItem('greensignal_token');
+      updateAuthNavButtons();
+      window.location.href = '/auth.html';
+    }
+
+    // Check user session state for header pill
+    document.addEventListener('DOMContentLoaded', () => {
+      updateAuthNavButtons();
+
+      // Close navigation dropdown when clicking outside
+      document.addEventListener('click', (event) => {
+        const navDropdown = document.getElementById('indexNavMenuDropdown');
+        const navBtn = document.getElementById('indexNavMenuBtn');
+        if (navDropdown && !navDropdown.classList.contains('hidden')) {
+          if (!navDropdown.contains(event.target) && !navBtn?.contains(event.target)) {
+            navDropdown.classList.add('hidden');
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

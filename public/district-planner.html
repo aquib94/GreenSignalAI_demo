@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenSignalAI - District Disaster Resource Planner</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    
+    @media print {
+      @page {
+        margin: 10mm 15mm 10mm 15mm;
+        size: A4 portrait;
+      }
+      html, body {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        height: auto !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      body > *:not(#workOrderPrintArea):not(#boqPrintArea) {
+        display: none !important;
+      }
+      #workOrderPrintArea, #boqPrintArea {
+        display: block !important;
+        visibility: visible !important;
+        position: static !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      #workOrderPrintArea *, #boqPrintArea * {
+        visibility: visible !important;
+        color: #000000 !important;
+      }
+      .no-print { display: none !important; }
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+    }
+    input, select, textarea, button {
+      box-sizing: border-box !important;
+      max-width: 100% !important;
+    }
+    select {
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans bg-slate-950 text-slate-100 antialiased overflow-x-hidden">
+
+  <!-- ==================== 1. LOGIN SCREEN ==================== -->
+  <div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 overflow-y-auto">
+    <div class="w-full max-w-md bg-slate-900/90 border border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-2xl backdrop-blur-xl space-y-4 sm:space-y-6 my-auto min-w-0">
+      
+      <!-- Brand Logo Header -->
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-emerald-600/20 border border-emerald-500/30 rounded-2xl text-emerald-400 mb-1 sm:mb-2 shadow-lg shadow-emerald-500/10">
+          <i class="fa-solid fa-compass-drafting text-xl sm:text-2xl"></i>
+        </div>
+        <h1 class="text-lg sm:text-xl font-bold text-white tracking-tight">GreenSignalAI</h1>
+        <p class="text-xs text-slate-400">District Disaster Preparedness & Stock Planning System</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="handlePlannerLogin(event)" class="space-y-4 w-full min-w-0">
+        <div class="w-full min-w-0">
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Planner Account / Username</label>
+          <div class="relative w-full min-w-0">
+            <i class="fa-solid fa-user-gear absolute left-3.5 top-3 text-slate-500 text-xs"></i>
+            <input type="text" id="loginUser" required value="planner.bogura" 
+                   class="w-full max-w-full box-border bg-slate-950 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition">
+          </div>
+        </div>
+
+        <div class="w-full min-w-0">
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Assigned Administrative District</label>
+          <div class="relative w-full min-w-0">
+            <i class="fa-solid fa-map-location-dot absolute left-3.5 top-3 text-slate-500 text-xs"></i>
+            <select id="loginDistrict" class="w-full max-w-full box-border bg-slate-950 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition truncate">
+              <option value="Bogura">Bogura District (12 Upazilas)</option>
+              <option value="Kurigram">Kurigram District (9 Upazilas)</option>
+              <option value="Sunamganj">Sunamganj District (11 Upazilas)</option>
+              <option value="Cox's Bazar">Cox's Bazar District (9 Upazilas)</option>
+              <option value="Khulna">Khulna District (9 Upazilas)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="w-full min-w-0">
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Password</label>
+          <div class="relative w-full min-w-0">
+            <i class="fa-solid fa-lock absolute left-3.5 top-3 text-slate-500 text-xs"></i>
+            <input type="password" required value="password123" 
+                   class="w-full max-w-full box-border bg-slate-950 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-600/20 transition duration-200 text-xs flex items-center justify-center gap-2 mt-2">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Access District Planner Console</span>
+        </button>
+      </form>
+
+      <div class="text-center pt-2 border-t border-slate-800/80">
+        <p class="text-[10px] text-slate-500">Authorized Personnel Only • GreenSignalAI Emergency Infrastructure</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. MAIN PLANNER DASHBOARD ==================== -->
+  <div id="plannerDashboard" class="hidden flex-1 flex flex-col h-full overflow-hidden">
+    
+    <!-- TOP NAVIGATION BAR -->
+    <header class="bg-slate-900 border-b border-slate-800 px-3 sm:px-6 py-3 flex items-center justify-between shrink-0 shadow-md">
+      <div class="flex items-center space-x-2.5 sm:space-x-3 min-w-0">
+        <div class="bg-emerald-600 p-1.5 sm:p-2 rounded-xl text-white shadow-md shadow-emerald-500/20 shrink-0">
+          <i class="fa-solid fa-sliders text-base sm:text-lg"></i>
+        </div>
+        <div class="min-w-0">
+          <h1 class="text-sm sm:text-base font-bold text-white flex items-center gap-1.5 flex-wrap">
+            <span>GreenSignalAI</span> <span class="text-[10px] sm:text-xs font-normal text-emerald-400 bg-emerald-950/80 border border-emerald-800/60 px-2 py-0.5 rounded-full whitespace-nowrap">Planner</span>
+          </h1>
+          <p class="text-[11px] sm:text-xs text-slate-400 truncate">Region: <span id="activeDistrictBadge" class="font-bold text-slate-200">Bogura District</span></p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
+        <span class="text-xs text-slate-400 hidden md:inline">Logged in as: <b id="plannerNameText" class="text-slate-200">planner.bogura</b></span>
+        <a href="/proposal.html" class="bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white text-xs font-semibold px-2.5 sm:px-3 py-1.5 rounded-lg border border-emerald-600 transition flex items-center gap-1.5 shadow" title="MoDMR National Proposal">
+          <i class="fa-solid fa-file-contract text-emerald-300"></i> <span class="hidden sm:inline">Proposal (100 Cr)</span>
+        </a>
+        <a href="/" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold px-2.5 sm:px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-gauge text-emerald-400"></i> <span class="hidden sm:inline">Dashboard</span>
+        </a>
+        <button onclick="handleLogout()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-2.5 sm:px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-right-from-bracket text-rose-400"></i> <span class="hidden sm:inline">Exit</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN DASHBOARD CONTENT AREA -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar space-y-6">
+
+      <!-- SECTION A: RISK & PROBABILITY ASSESSOR -->
+      <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <h2 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-cloud-bolt"></i> Step 1: Set District Risk & Hazard Probabilities
+            </h2>
+            <p class="text-xs text-slate-400">Adjust the predicted probability (%) for environmental crises in the coming season.</p>
+          </div>
+          <button onclick="presetRiskProfile('monsoon')" class="self-start md:self-auto bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Preset High Flood Risk
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Flood Probability -->
+          <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2">
+            <div class="flex justify-between items-center">
+              <label class="text-xs font-bold text-blue-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-water"></i> Flood Risk
+              </label>
+              <span id="floodVal" class="text-xs font-mono font-bold text-white bg-blue-950 px-2 py-0.5 rounded border border-blue-800">65%</span>
+            </div>
+            <input type="range" id="floodInput" min="0" max="100" value="65" oninput="updateRiskValues()" class="w-full accent-blue-500 cursor-pointer">
+            <p class="text-[10px] text-slate-500">River erosion & seasonal monsoon surge</p>
+          </div>
+
+          <!-- Storm / Cyclone Probability -->
+          <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2">
+            <div class="flex justify-between items-center">
+              <label class="text-xs font-bold text-teal-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-wind"></i> Storm / Cyclone
+              </label>
+              <span id="stormVal" class="text-xs font-mono font-bold text-white bg-teal-950 px-2 py-0.5 rounded border border-teal-800">40%</span>
+            </div>
+            <input type="range" id="stormInput" min="0" max="100" value="40" oninput="updateRiskValues()" class="w-full accent-teal-500 cursor-pointer">
+            <p class="text-[10px] text-slate-500">Tropical wind & structural damage potential</p>
+          </div>
+
+          <!-- Earthquake Probability -->
+          <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2">
+            <div class="flex justify-between items-center">
+              <label class="text-xs font-bold text-rose-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-house-crack"></i> Earthquake
+              </label>
+              <span id="earthquakeVal" class="text-xs font-mono font-bold text-white bg-rose-950 px-2 py-0.5 rounded border border-rose-800">15%</span>
+            </div>
+            <input type="range" id="earthquakeInput" min="0" max="100" value="15" oninput="updateRiskValues()" class="w-full accent-rose-500 cursor-pointer">
+            <p class="text-[10px] text-slate-500">Seismic tremors & building displacement</p>
+          </div>
+
+          <!-- Salinity Crisis Probability -->
+          <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2">
+            <div class="flex justify-between items-center">
+              <label class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-flask-vial"></i> Salinity Crisis
+              </label>
+              <span id="salinityVal" class="text-xs font-mono font-bold text-white bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">25%</span>
+            </div>
+            <input type="range" id="salinityInput" min="0" max="100" value="25" oninput="updateRiskValues()" class="w-full accent-emerald-500 cursor-pointer">
+            <p class="text-[10px] text-slate-500">Potable groundwater contamination</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION B: UPAZILA STOCK PLANNING TABLE -->
+      <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+          <div>
+            <h2 class="text-sm font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-cubes-stacked"></i> Step 2: Resource Allocation Across Upazilas
+            </h2>
+            <p class="text-xs text-slate-400">Set target emergency stock quotas for each upazila in <span id="districtTableTitle" class="text-indigo-400 font-semibold">Bogura District</span>.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="autoOptimizeStocks()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow transition flex items-center gap-1.5">
+              <i class="fa-solid fa-calculator"></i> Auto-Optimize Stocks
+            </button>
+            <button onclick="runSimulation()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow transition flex items-center gap-1.5">
+              <i class="fa-solid fa-play"></i> Run Simulation
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Upazila Table -->
+        <div class="overflow-x-auto custom-scrollbar border border-slate-800 rounded-xl">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-slate-950 text-slate-300 font-semibold border-b border-slate-800 uppercase text-[10px]">
+                <th class="p-3">Upazila Name</th>
+                <th class="p-3">Est. Population</th>
+                <th class="p-3 text-center">Food Packs (Units)</th>
+                <th class="p-3 text-center">Medical Kits (Units)</th>
+                <th class="p-3 text-center">Shelter Tents (Units)</th>
+                <th class="p-3 text-center">Water Units (Liters)</th>
+                <th class="p-3 text-center">Evac Boats/Trucks</th>
+              </tr>
+            </thead>
+            <tbody id="upazilaTableBody" class="divide-y divide-slate-800/80 font-mono text-slate-200">
+              <!-- Upazila Rows Rendered Dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION C: SIMULATION RESULTS & IMPACT METRICS -->
+      <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div>
+            <h2 class="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-chart-line"></i> Step 3: Predictive Impact & Results
+            </h2>
+            <p class="text-xs text-slate-400">Real-time outcome projected by the disaster response planning algorithm.</p>
+          </div>
+          <span class="text-[10px] text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-800">
+            <i class="fa-solid fa-circle-check"></i> Simulation Up-To-Date
+          </span>
+        </div>
+
+        <!-- Result KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Lives Saved -->
+          <div class="bg-gradient-to-br from-emerald-950/50 to-slate-950 border border-emerald-800/60 p-4 rounded-xl relative overflow-hidden">
+            <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1">Estimated Lives Saved</div>
+            <div id="metricLivesSaved" class="text-2xl font-black font-mono text-white">18,450</div>
+            <p class="text-[10px] text-slate-400 mt-1">Based on medical & food coverage ratio</p>
+            <i class="fa-solid fa-heart-pulse absolute -right-2 -bottom-2 text-4xl text-emerald-500/10"></i>
+          </div>
+
+          <!-- Cost Reduced -->
+          <div class="bg-gradient-to-br from-blue-950/50 to-slate-950 border border-blue-800/60 p-4 rounded-xl relative overflow-hidden">
+            <div class="text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1">Loss & Damage Reduced</div>
+            <div id="metricCostReduced" class="text-2xl font-black font-mono text-white">৳ 45.2 Million BDT</div>
+            <p class="text-[10px] text-slate-400 mt-1">Preventative response vs emergency crisis cost</p>
+            <i class="fa-solid fa-sack-dollar absolute -right-2 -bottom-2 text-4xl text-blue-500/10"></i>
+          </div>
+
+          <!-- Population Protected Coverage -->
+          <div class="bg-gradient-to-br from-purple-950/50 to-slate-950 border border-purple-800/60 p-4 rounded-xl relative overflow-hidden">
+            <div class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-1">Population Protection Ratio</div>
+            <div id="metricProtectionRatio" class="text-2xl font-black font-mono text-white">88.4%</div>
+            <p class="text-[10px] text-slate-400 mt-1">Of high-vulnerability population</p>
+            <i class="fa-solid fa-shield-halved absolute -right-2 -bottom-2 text-4xl text-purple-500/10"></i>
+          </div>
+
+          <!-- Total District Budget -->
+          <div class="bg-gradient-to-br from-amber-950/50 to-slate-950 border border-amber-800/60 p-4 rounded-xl relative overflow-hidden">
+            <div class="text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-1">Required Stock Investment</div>
+            <div id="metricTotalBudget" class="text-2xl font-black font-mono text-white">৳ 28.6 Million BDT</div>
+            <p class="text-[10px] text-slate-400 mt-1">Estimated Work Order procurement total</p>
+            <i class="fa-solid fa-file-invoice-dollar absolute -right-2 -bottom-2 text-4xl text-amber-500/10"></i>
+          </div>
+        </div>
+
+        <!-- PRINT WORK ORDER ACTION BAR -->
+        <div class="pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="text-xs text-slate-400 flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-indigo-400"></i>
+            <span>Generate official District Disaster Relief & Procurement Work Order with administrative authorization signatures.</span>
+          </div>
+          <button onclick="generateAndPrintWorkOrder()" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-file-signature"></i>
+            <span>Print Work Order</span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==================== 3. PRINTABLE WORK ORDER AREA (HIDDEN ON SCREEN, SHOWN ON PRINT) ==================== -->
+  <div id="workOrderPrintArea" class="hidden font-sans bg-white text-slate-900 p-8">
+    <!-- Populated Dynamically for Printing -->
+  </div>
+  <div id="boqPrintArea" class="hidden"></div>
+
+  <!-- ==================== SCRIPT ENGINE & ALGORITHM ==================== -->
+  <script>
+    // --- DISTRICT DATA STORE ---
+    const DISTRICT_DATA = {
+      "Bogura": [
+        { name: "Adamdighi", pop: 195000 },
+        { name: "Bogura Sadar", pop: 555000 },
+        { name: "Dhunat", pop: 290000 },
+        { name: "Dupchanchia", pop: 175000 },
+        { name: "Gabtali", pop: 320000 },
+        { name: "Kahaloo", pop: 220000 },
+        { name: "Nandigram", pop: 180000 },
+        { name: "Sariakandi", pop: 270000 },
+        { name: "Shajahanpur", pop: 260000 },
+        { name: "Sherpur", pop: 330000 },
+        { name: "Shibganj", pop: 378000 },
+        { name: "Sonatala", pop: 186000 }
+      ],
+      "Kurigram": [
+        { name: "Kurigram Sadar", pop: 312000 },
+        { name: "Nageshwari", pop: 394000 },
+        { name: "Bhurungamari", pop: 231000 },
+        { name: "Phulbari", pop: 160000 },
+        { name: "Rajarhat", pop: 188000 },
+        { name: "Ulipur", pop: 410000 },
+        { name: "Chilmari", pop: 125000 },
+        { name: "Rowmari", pop: 205000 },
+        { name: "Char Rajibpur", pop: 78000 }
+      ],
+      "Sunamganj": [
+        { name: "Sunamganj Sadar", pop: 270000 },
+        { name: "South Sunamganj", pop: 183000 },
+        { name: "Chhatak", pop: 400000 },
+        { name: "Jagannathpur", pop: 225000 },
+        { name: "Derai", pop: 240000 },
+        { name: "Shalla", pop: 115000 },
+        { name: "Dharampasha", pop: 210000 },
+        { name: "Tahirpur", pop: 200000 },
+        { name: "Bishwamambharpur", pop: 156000 },
+        { name: "Jamalganj", pop: 167000 },
+        { name: "Doarabazar", pop: 220000 }
+      ],
+      "Cox's Bazar": [
+        { name: "Cox's Bazar Sadar", pop: 460000 },
+        { name: "Ramu", pop: 266000 },
+        { name: "Teknaf", pop: 310000 },
+        { name: "Ukhia", pop: 230000 },
+        { name: "Chakaria", pop: 475000 },
+        { name: "Pekua", pop: 171000 },
+        { name: "Maheshkhali", pop: 321000 },
+        { name: "Kutubdia", pop: 125000 }
+      ],
+      "Khulna": [
+        { name: "Koyra", pop: 193000 },
+        { name: "Dacope", pop: 152000 },
+        { name: "Paikgachha", pop: 248000 },
+        { name: "Batiaghata", pop: 171000 },
+        { name: "Rupsha", pop: 179000 },
+        { name: "Dumuria", pop: 305000 },
+        { name: "Phultala", pop: 84000 },
+        { name: "Khan Jahan Ali", pop: 88000 },
+        { name: "Terokhada", pop: 116000 }
+      ]
+    };
+
+    // ITEM UNIT COSTS (IN BDT)
+    const UNIT_PRICES = {
+      food: 1200,      // Per pack
+      med: 3500,       // Per kit
+      tent: 8500,      // Per tent
+      water: 15,       // Per liter
+      vehicle: 150000  // Per boat/truck asset
+    };
+
+    let activeDistrict = "Bogura";
+    let activeUser = "planner.bogura";
+
+    // --- LOGIN HANDLER ---
+    function handlePlannerLogin(e) {
+      e.preventDefault();
+      activeUser = document.getElementById("loginUser").value.trim();
+      activeDistrict = document.getElementById("loginDistrict").value;
+
+      document.getElementById("loginScreen").classList.add("hidden");
+      document.getElementById("plannerDashboard").classList.remove("hidden");
+
+      document.getElementById("activeDistrictBadge").innerText = activeDistrict + " District";
+      document.getElementById("plannerNameText").innerText = activeUser;
+      document.getElementById("districtTableTitle").innerText = activeDistrict + " District";
+
+      renderUpazilaTable();
+      runSimulation();
+    }
+
+    function handleLogout() {
+      document.getElementById("plannerDashboard").classList.add("hidden");
+      document.getElementById("loginScreen").classList.remove("hidden");
+    }
+
+    // --- RISK ASSESSOR UPDATES ---
+    function updateRiskValues() {
+      document.getElementById("floodVal").innerText = document.getElementById("floodInput").value + "%";
+      document.getElementById("stormVal").innerText = document.getElementById("stormInput").value + "%";
+      document.getElementById("earthquakeVal").innerText = document.getElementById("earthquakeInput").value + "%";
+      document.getElementById("salinityVal").innerText = document.getElementById("salinityInput").value + "%";
+
+      runSimulation();
+    }
+
+    function presetRiskProfile(type) {
+      if (type === 'monsoon') {
+        document.getElementById("floodInput").value = 85;
+        document.getElementById("stormInput").value = 55;
+        document.getElementById("earthquakeInput").value = 10;
+        document.getElementById("salinityInput").value = 30;
+      }
+      updateRiskValues();
+      autoOptimizeStocks();
+    }
+
+    // --- RENDER TABLE ---
+    function renderUpazilaTable() {
+      const upazilas = DISTRICT_DATA[activeDistrict] || [];
+      const tbody = document.getElementById("upazilaTableBody");
+      tbody.innerHTML = "";
+
+      upazilas.forEach((up, idx) => {
+        // Sensible default allocations scaled by population
+        const defFood = Math.round((up.pop / 1000) * 8);
+        const defMed = Math.round((up.pop / 1000) * 2.5);
+        const defTent = Math.round((up.pop / 1000) * 1.2);
+        const defWater = Math.round((up.pop / 1000) * 120);
+        const defVehicles = Math.max(2, Math.round((up.pop / 1000) * 0.08));
+
+        const tr = document.createElement("tr");
+        tr.className = "border-b border-slate-800/80 hover:bg-slate-950/60";
+        tr.innerHTML = `
+          <td class="p-3 font-semibold text-slate-200 font-sans">${up.name}</td>
+          <td class="p-3 text-slate-400 font-mono">${up.pop.toLocaleString()}</td>
+          <td class="p-3 text-center">
+            <input type="number" id="food_${idx}" data-idx="${idx}" value="${defFood}" oninput="runSimulation()" class="w-20 bg-slate-950 border border-slate-700 rounded text-center p-1.5 text-xs text-white focus:border-indigo-500 focus:outline-none">
+          </td>
+          <td class="p-3 text-center">
+            <input type="number" id="med_${idx}" data-idx="${idx}" value="${defMed}" oninput="runSimulation()" class="w-20 bg-slate-950 border border-slate-700 rounded text-center p-1.5 text-xs text-white focus:border-indigo-500 focus:outline-none">
+          </td>
+          <td class="p-3 text-center">
+            <input type="number" id="tent_${idx}" data-idx="${idx}" value="${defTent}" oninput="runSimulation()" class="w-20 bg-slate-950 border border-slate-700 rounded text-center p-1.5 text-xs text-white focus:border-indigo-500 focus:outline-none">
+          </td>
+          <td class="p-3 text-center">
+            <input type="number" id="water_${idx}" data-idx="${idx}" value="${defWater}" oninput="runSimulation()" class="w-24 bg-slate-950 border border-slate-700 rounded text-center p-1.5 text-xs text-white focus:border-indigo-500 focus:outline-none">
+          </td>
+          <td class="p-3 text-center">
+            <input type="number" id="veh_${idx}" data-idx="${idx}" value="${defVehicles}" oninput="runSimulation()" class="w-16 bg-slate-950 border border-slate-700 rounded text-center p-1.5 text-xs text-white focus:border-indigo-500 focus:outline-none">
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // --- AUTO-OPTIMIZE STOCKS ALGORITHM ---
+    function autoOptimizeStocks() {
+      const floodP = parseInt(document.getElementById("floodInput").value) / 100;
+      const stormP = parseInt(document.getElementById("stormInput").value) / 100;
+      const earthP = parseInt(document.getElementById("earthquakeInput").value) / 100;
+      const salinP = parseInt(document.getElementById("salinityInput").value) / 100;
+
+      // Weighted Composite Risk Factor
+      const compositeRisk = (floodP * 0.40) + (stormP * 0.25) + (earthP * 0.15) + (salinP * 0.20);
+      const upazilas = DISTRICT_DATA[activeDistrict] || [];
+
+      upazilas.forEach((up, idx) => {
+        const riskMultiplier = 1 + (compositeRisk * 1.5);
+        
+        document.getElementById(`food_${idx}`).value = Math.round((up.pop / 1000) * 10 * riskMultiplier);
+        document.getElementById(`med_${idx}`).value = Math.round((up.pop / 1000) * 3 * riskMultiplier);
+        document.getElementById(`tent_${idx}`).value = Math.round((up.pop / 1000) * 1.5 * (1 + stormP + earthP));
+        document.getElementById(`water_${idx}`).value = Math.round((up.pop / 1000) * 150 * (1 + floodP + salinP));
+        document.getElementById(`veh_${idx}`).value = Math.max(2, Math.round((up.pop / 1000) * 0.1 * (1 + floodP)));
+      });
+
+      runSimulation();
+    }
+
+    // --- SIMULATION & IMPACT EVALUATION ALGORITHM ---
+    function runSimulation() {
+      const upazilas = DISTRICT_DATA[activeDistrict] || [];
+      const floodP = parseInt(document.getElementById("floodInput").value) / 100;
+      const stormP = parseInt(document.getElementById("stormInput").value) / 100;
+      const earthP = parseInt(document.getElementById("earthquakeInput").value) / 100;
+      const salinP = parseInt(document.getElementById("salinityInput").value) / 100;
+
+      // Overall Hazard Weight
+      const compositeRiskIndex = Math.min(1.0, (floodP * 0.45) + (stormP * 0.25) + (earthP * 0.15) + (salinP * 0.15));
+
+      let totalDistrictPop = 0;
+      let totalFood = 0;
+      let totalMed = 0;
+      let totalTent = 0;
+      let totalWater = 0;
+      let totalVeh = 0;
+
+      upazilas.forEach((up, idx) => {
+        totalDistrictPop += up.pop;
+        totalFood += parseInt(document.getElementById(`food_${idx}`)?.value || 0);
+        totalMed += parseInt(document.getElementById(`med_${idx}`)?.value || 0);
+        totalTent += parseInt(document.getElementById(`tent_${idx}`)?.value || 0);
+        totalWater += parseInt(document.getElementById(`water_${idx}`)?.value || 0);
+        totalVeh += parseInt(document.getElementById(`veh_${idx}`)?.value || 0);
+      });
+
+      // Target Vulnerable Population expected to need relief
+      const vulnerablePop = Math.round(totalDistrictPop * compositeRiskIndex * 0.35);
+
+      // Supply Coverage Calculation (1 food pack = 5 person-days, 1 med kit = 20 persons, 1 tent = 6 persons, 10L water = 1 person-day)
+      const foodCapacity = totalFood * 5;
+      const medCapacity = totalMed * 20;
+      const tentCapacity = totalTent * 6;
+      const waterCapacity = totalWater / 10;
+
+      // Protection Coverage Ratio
+      const averageSupported = (foodCapacity + medCapacity + tentCapacity + waterCapacity) / 4;
+      const protectionRatio = vulnerablePop > 0 ? Math.min(1.0, averageSupported / vulnerablePop) : 1.0;
+
+      // 1) LIVES SAVED ALGORITHM:
+      // Mortality rate without intervention = 1.2% of unassisted vulnerable population
+      const livesSaved = Math.round(vulnerablePop * protectionRatio * 0.048 * (1 + compositeRiskIndex));
+
+      // 2) COST REDUCTION ALGORITHM (BDT):
+      // Immediate pre-disaster stock allocation saves ~3.4x in post-disaster emergency rescue, healthcare & rebuild costs
+      const totalStockCostBDT = (totalFood * UNIT_PRICES.food) + 
+                                (totalMed * UNIT_PRICES.med) + 
+                                (totalTent * UNIT_PRICES.tent) + 
+                                (totalWater * UNIT_PRICES.water) + 
+                                (totalVeh * UNIT_PRICES.vehicle);
+
+      const damagePreventedBDT = totalStockCostBDT * 2.8 * (0.5 + compositeRiskIndex);
+      const netCostReducedBDT = Math.max(0, damagePreventedBDT - totalStockCostBDT);
+
+      // --- DOM METRICS UPDATES ---
+      document.getElementById("metricLivesSaved").innerText = livesSaved.toLocaleString();
+      document.getElementById("metricCostReduced").innerText = "৳ " + (netCostReducedBDT / 1000000).toFixed(1) + " Million";
+      document.getElementById("metricProtectionRatio").innerText = (protectionRatio * 100).toFixed(1) + "%";
+      document.getElementById("metricTotalBudget").innerText = "৳ " + (totalStockCostBDT / 1000000).toFixed(2) + " Million";
+    }
+
+    // --- PRINT OFFICIAL RELIEF WORK ORDER GENERATOR ---
+    function generateAndPrintWorkOrder() {
+      const upazilas = DISTRICT_DATA[activeDistrict] || [];
+      
+      let sumFood = 0, sumMed = 0, sumTent = 0, sumWater = 0, sumVeh = 0;
+
+      upazilas.forEach((_, idx) => {
+        sumFood += parseInt(document.getElementById(`food_${idx}`)?.value || 0);
+        sumMed += parseInt(document.getElementById(`med_${idx}`)?.value || 0);
+        sumTent += parseInt(document.getElementById(`tent_${idx}`)?.value || 0);
+        sumWater += parseInt(document.getElementById(`water_${idx}`)?.value || 0);
+        sumVeh += parseInt(document.getElementById(`veh_${idx}`)?.value || 0);
+      });
+
+      const costFood = sumFood * UNIT_PRICES.food;
+      const costMed = sumMed * UNIT_PRICES.med;
+      const costTent = sumTent * UNIT_PRICES.tent;
+      const costWater = sumWater * UNIT_PRICES.water;
+      const costVeh = sumVeh * UNIT_PRICES.vehicle;
+      const grandTotalCost = costFood + costMed + costTent + costWater + costVeh;
+
+      const serialNo = `WO-DDMC-${activeDistrict.toUpperCase().replace(/\s+/g, '')}-${Date.now().toString().slice(-6)}`;
+      const issueDate = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+      const printArea = document.getElementById("workOrderPrintArea") || document.getElementById("boqPrintArea");
+      printArea.innerHTML = `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; color: #0f172a; background-color: #ffffff; padding: 24px; line-height: 1.4;">
+          
+          <!-- OFFICIAL GOVERNMENT BANNER -->
+          <div style="border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <div style="font-size: 9px; font-weight: 800; letter-spacing: 1px; color: #475569; text-transform: uppercase;">Government of the People's Republic of Bangladesh</div>
+                <div style="font-size: 10px; font-weight: 700; color: #334155; text-transform: uppercase; margin-top: 1px;">Office of the Deputy Commissioner & District Magistrate • District Disaster Management Committee (DDMC)</div>
+                <h1 style="font-size: 18px; font-weight: 900; color: #0f172a; text-transform: uppercase; margin: 4px 0 0 0; letter-spacing: 0.5px;">
+                  District Disaster Relief & Procurement Work Order
+                </h1>
+              </div>
+              <div style="text-align: right; border-left: 2px solid #e2e8f0; padding-left: 12px;">
+                <div style="display: inline-block; background-color: #f1f5f9; border: 1px solid #cbd5e1; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; font-family: monospace;">
+                  STATUS: APPROVED
+                </div>
+                <div style="font-size: 9px; color: #64748b; margin-top: 3px;">PRIORITY: RAPID DEPLOYMENT</div>
+              </div>
+            </div>
+
+            <!-- METADATA INFORMATION GRID -->
+            <div style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 16px; margin-top: 12px; padding: 10px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 10px;">
+              <div>
+                <div style="margin-bottom: 3px;"><b>Jurisdiction:</b> ${activeDistrict} District Administration (${upazilas.length} Upazilas)</div>
+                <div style="margin-bottom: 3px;"><b>Authorizing Officer:</b> ${activeUser} (District Disaster Planner)</div>
+                <div><b>Target Vulnerable Coverage:</b> High-Risk Flood & Cyclone Evacuation Zones</div>
+              </div>
+              <div>
+                <div style="margin-bottom: 3px;"><b>Work Order Serial:</b> <span style="font-family: monospace; font-weight: bold;">${serialNo}</span></div>
+                <div style="margin-bottom: 3px;"><b>Date Issued:</b> ${issueDate}</div>
+                <div><b>Procurement Framework:</b> Public Procurement Rules (Emergency Disaster Provision)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 1: ITEMIZED DISTRICT PROCUREMENT SCHEDULE -->
+          <div style="margin-bottom: 16px;">
+            <h2 style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #0f172a; margin: 0 0 6px 0;">
+              1. Itemized Procurement & Resource Allocation Schedule
+            </h2>
+            <table style="width: 100%; border-collapse: collapse; font-size: 10px; background-color: #ffffff;" border="1" cellpadding="6" bordercolor="#cbd5e1">
+              <thead>
+                <tr style="background-color: #f1f5f9; color: #1e293b; font-weight: bold;">
+                  <th align="left" style="padding: 6px;">Resource Description</th>
+                  <th align="center" style="padding: 6px;">Unit Type</th>
+                  <th align="right" style="padding: 6px; background-color: #e2e8f0;">Total District Qty Ordered</th>
+                  <th align="right" style="padding: 6px;">Est. Unit Rate (BDT)</th>
+                  <th align="right" style="padding: 6px;">Total Budget Allocation (BDT)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 6px; font-weight: 600; color: #0f172a;">Emergency Relief Food Packs (Dry Rations, Rice, Pulses, Oil)</td>
+                  <td align="center" style="padding: 6px; color: #475569;">Pack (Standard Ration)</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; background-color: #f8fafc; color: #0f172a;">${sumFood.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; color: #475569;">৳ ${UNIT_PRICES.food.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; color: #0f172a;">৳ ${costFood.toLocaleString()}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; font-weight: 600; color: #0f172a;">Emergency Medical Kits (First Aid, ORS, Water Tablets, Antiseptic)</td>
+                  <td align="center" style="padding: 6px; color: #475569;">Trauma Kit</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; background-color: #f8fafc; color: #0f172a;">${sumMed.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; color: #475569;">৳ ${UNIT_PRICES.med.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; color: #0f172a;">৳ ${costMed.toLocaleString()}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; font-weight: 600; color: #0f172a;">Temporary Weatherproof Shelter Tents (Family Size 6-8 Persons)</td>
+                  <td align="center" style="padding: 6px; color: #475569;">Shelter Unit</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; background-color: #f8fafc; color: #0f172a;">${sumTent.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; color: #475569;">৳ ${UNIT_PRICES.tent.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; color: #0f172a;">৳ ${costTent.toLocaleString()}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; font-weight: 600; color: #0f172a;">Potable Drinking Water Containers & Purification Stocks</td>
+                  <td align="center" style="padding: 6px; color: #475569;">Liter (Sealed Drum)</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; background-color: #f8fafc; color: #0f172a;">${sumWater.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; color: #475569;">৳ ${UNIT_PRICES.water.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; color: #0f172a;">৳ ${costWater.toLocaleString()}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; font-weight: 600; color: #0f172a;">Emergency Evacuation Logistics Assets (Rescue Speedboats & 4WD Trucks)</td>
+                  <td align="center" style="padding: 6px; color: #475569;">Vehicle / Boat Asset</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; background-color: #f8fafc; color: #0f172a;">${sumVeh.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; color: #475569;">৳ ${UNIT_PRICES.vehicle.toLocaleString()}</td>
+                  <td align="right" style="padding: 6px; font-weight: bold; color: #0f172a;">৳ ${costVeh.toLocaleString()}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr style="background-color: #f8fafc; font-size: 11px; font-weight: bold;">
+                  <td colspan="4" align="right" style="padding: 8px; text-transform: uppercase;">
+                    GRAND TOTAL SANCTIONED PROCUREMENT BUDGET:
+                  </td>
+                  <td align="right" style="padding: 8px; color: #0f172a; font-size: 12px;">
+                    ৳ ${grandTotalCost.toLocaleString()} BDT
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <!-- SECTION 2: UPAZILA-LEVEL ALLOCATION BREAKDOWN -->
+          <div style="margin-bottom: 16px;">
+            <h2 style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #0f172a; margin: 0 0 6px 0;">
+              2. Upazila Sub-Disaster Depot Distribution Roster
+            </h2>
+            <table style="width: 100%; border-collapse: collapse; font-size: 9.5px; background-color: #ffffff;" border="1" cellpadding="5" bordercolor="#cbd5e1">
+              <thead>
+                <tr style="background-color: #f1f5f9; color: #1e293b; font-weight: bold;">
+                  <th align="left" style="padding: 5px;">Upazila Name</th>
+                  <th align="right" style="padding: 5px;">Population</th>
+                  <th align="right" style="padding: 5px;">Food Packs</th>
+                  <th align="right" style="padding: 5px;">Medical Kits</th>
+                  <th align="right" style="padding: 5px;">Tents</th>
+                  <th align="right" style="padding: 5px;">Water (L)</th>
+                  <th align="right" style="padding: 5px;">Vehicles</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${upazilas.map((u, i) => `
+                  <tr>
+                    <td style="padding: 5px; font-weight: 600; color: #0f172a;">${u.name}</td>
+                    <td align="right" style="padding: 5px; color: #475569;">${u.pop.toLocaleString()}</td>
+                    <td align="right" style="padding: 5px; color: #0f172a; font-weight: 500;">${parseInt(document.getElementById(`food_${i}`)?.value || 0).toLocaleString()}</td>
+                    <td align="right" style="padding: 5px; color: #0f172a; font-weight: 500;">${parseInt(document.getElementById(`med_${i}`)?.value || 0).toLocaleString()}</td>
+                    <td align="right" style="padding: 5px; color: #0f172a; font-weight: 500;">${parseInt(document.getElementById(`tent_${i}`)?.value || 0).toLocaleString()}</td>
+                    <td align="right" style="padding: 5px; color: #0f172a; font-weight: 500;">${parseInt(document.getElementById(`water_${i}`)?.value || 0).toLocaleString()}</td>
+                    <td align="right" style="padding: 5px; color: #0f172a; font-weight: 500;">${parseInt(document.getElementById(`veh_${i}`)?.value || 0).toLocaleString()}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SECTION 3: TERMS & EXECUTION CONDITIONS -->
+          <div style="margin-bottom: 24px; padding: 10px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 9.5px; color: #334155;">
+            <div style="font-weight: bold; text-transform: uppercase; margin-bottom: 4px; color: #0f172a;">3. Official Directives & Fulfillment Terms:</div>
+            <ol style="margin: 0; padding-left: 16px; line-height: 1.5;">
+              <li>All procured goods must conform strictly to the Disaster Management Act (2012) quality certifications.</li>
+              <li>Consignments must be dispatched to upazila cyclone/flood relief centers within 48 hours of administrative sanction.</li>
+              <li>Suppliers and transporters must furnish signed delivery challans bearing Work Order Ref <b>${serialNo}</b> for audit clearance.</li>
+            </ol>
+          </div>
+
+          <!-- SECTION 4: FORMAL SIGNATURE BLOCKS -->
+          <div style="margin-top: 36px; padding-top: 12px; border-top: 1px dashed #94a3b8;">
+            <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: #475569; margin-bottom: 20px; letter-spacing: 0.5px;">
+              4. Authorizing Administrative Signatures & Official Clearance
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
+              <!-- Signature 1: District Planning Officer -->
+              <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; background-color: #ffffff; display: flex; flex-direction: column; justify-content: space-between; min-height: 120px;">
+                <div>
+                  <div style="font-size: 9px; font-weight: bold; text-transform: uppercase; color: #64748b;">Prepared & Submitted By:</div>
+                  <div style="font-size: 10px; font-weight: bold; color: #0f172a; margin-top: 2px;">District Disaster Planning Officer</div>
+                </div>
+                <div style="margin-top: 36px;">
+                  <div style="border-top: 1px solid #475569; padding-top: 4px; font-size: 9px; color: #475569;">
+                    <div>Signature: ______________________</div>
+                    <div style="margin-top: 2px;">Name: ${activeUser}</div>
+                    <div style="margin-top: 2px;">Date: ${issueDate}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Signature 2: District Relief and Rehabilitation Officer (DRRO) -->
+              <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; background-color: #ffffff; display: flex; flex-direction: column; justify-content: space-between; min-height: 120px;">
+                <div>
+                  <div style="font-size: 9px; font-weight: bold; text-transform: uppercase; color: #64748b;">Inspected & Recommended By:</div>
+                  <div style="font-size: 10px; font-weight: bold; color: #0f172a; margin-top: 2px;">District Relief & Rehab Officer (DRRO)</div>
+                </div>
+                <div style="margin-top: 36px;">
+                  <div style="border-top: 1px solid #475569; padding-top: 4px; font-size: 9px; color: #475569;">
+                    <div>Signature: ______________________</div>
+                    <div style="margin-top: 2px;">Name: _________________________</div>
+                    <div style="margin-top: 2px;">Date: __________________________</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Signature 3: Deputy Commissioner (DC) -->
+              <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; background-color: #ffffff; display: flex; flex-direction: column; justify-content: space-between; min-height: 120px;">
+                <div>
+                  <div style="font-size: 9px; font-weight: bold; text-transform: uppercase; color: #64748b;">Approved & Sanctioned By:</div>
+                  <div style="font-size: 10px; font-weight: bold; color: #0f172a; margin-top: 2px;">Deputy Commissioner & DM</div>
+                </div>
+                <div style="margin-top: 36px;">
+                  <div style="border-top: 1px solid #475569; padding-top: 4px; font-size: 9px; color: #475569;">
+                    <div>Signature: ______________________</div>
+                    <div style="margin-top: 2px;">Official Seal: [ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]</div>
+                    <div style="margin-top: 2px;">Date: __________________________</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px; font-size: 8.5px; color: #94a3b8;">
+              Official Work Order Sanction Copy • GreenSignalAI National Disaster Management & Resource Planning Architecture
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      printArea.classList.remove('hidden');
+
+      setTimeout(() => {
+        window.print();
+        setTimeout(() => {
+          printArea.classList.add('hidden');
+        }, 1500);
+      }, 150);
+    }
+
+    // Backwards compatibility alias
+    const generateAndPrintBOQ = generateAndPrintWorkOrder;
+  </script>
+</body>
+</html>
